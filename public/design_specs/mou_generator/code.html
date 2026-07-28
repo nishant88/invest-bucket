@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MoU Generator | Investor's Bucket</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .mou-preview-card {
+            background: repeating-linear-gradient(#fff, #fff 31px, #e7e5e4 31px, #e7e5e4 32px);
+        }
+        @keyframes subtle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        .float-anim {
+            animation: subtle-float 4s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fea619",
+                        "inverse-on-surface": "#f1f1f0",
+                        "on-background": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#575250",
+                        "surface-container-high": "#e8e8e7",
+                        "on-secondary-container": "#684000",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-bright": "#f9f9f8",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#1b6b51",
+                        "on-primary-fixed": "#002116",
+                        "on-tertiary-fixed": "#1e1b19",
+                        "on-surface-variant": "#3f4944",
+                        "primary": "#004532",
+                        "secondary": "#855300",
+                        "tertiary-fixed": "#e9e1dd",
+                        "surface": "#f9f9f8",
+                        "on-tertiary-container": "#cdc6c2",
+                        "tertiary": "#3f3b39",
+                        "surface-container-low": "#f3f4f3",
+                        "primary-fixed-dim": "#8bd6b6",
+                        "inverse-surface": "#2f3130",
+                        "outline-variant": "#bec9c2",
+                        "inverse-primary": "#8bd6b6",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-tertiary-fixed-variant": "#4a4643",
+                        "surface-dim": "#dadad9",
+                        "error": "#ba1a1a",
+                        "primary-container": "#065f46",
+                        "background": "#f9f9f8",
+                        "tertiary-fixed-dim": "#ccc5c2",
+                        "on-primary-fixed-variant": "#00513b",
+                        "on-primary-container": "#8bd6b7",
+                        "outline": "#6f7973",
+                        "surface-container": "#eeeeed",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2a1700",
+                        "primary-fixed": "#a6f2d1",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-container-highest": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-inner-padding": "20px",
+                        "tap-target-min": "48px",
+                        "stack-gap": "16px",
+                        "container-padding": "20px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "currency-display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "currency-display": ["28px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-container-padding h-tap-target-min w-full fixed top-0 z-50 bg-surface dark:bg-surface-dim shadow-[0_4px_12px_rgba(6,95,70,0.05)]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A professional high-quality headshot of a business partner, captured with soft studio lighting and a warm, inviting smile. The subject is wearing a modern corporate-casual outfit against a clean, minimal off-white background, embodying trust and professional reliability for a fintech application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMm_ne87yRRAAeb0RYCmSA8b5fRkOgrB_BWUEPjEuRKiQ9x9VWHHBZ7FL_lsgUAG9gKBXF1TG_zSNYdTK_mDsYDzrPBZ5rFN9ioGXIiI3xSz8-HOUrZMq-1MLHOn1C5qUa2C-qLtnBvyRRXMkYhiWP3t0DTIgySCXFV-Nvyf3hIGE7GCMWTxul7JGIF054Jtn-LzxCjiMTYUyprWzrNse7jw8iKfoFcRz1eOPfchsLsVMjnfq2pfy4"/>
+</div>
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Investor's Bucket</span>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim p-2 hover:bg-surface-container transition-colors rounded-full">
+            notifications
+        </button>
+</header>
+<main class="pt-20 px-container-padding max-w-md mx-auto space-y-6">
+<!-- Document Title Section -->
+<section class="space-y-1">
+<h1 class="font-headline-md text-headline-md text-primary">MoU Generator</h1>
+<p class="font-body-sm text-on-surface-variant">Draft a handshake agreement in seconds. Lightweight, transparent, and collaborative.</p>
+</section>
+<!-- Document Preview Thumbnail (Asymmetric Layout) -->
+<div class="relative py-4">
+<div class="bg-white rounded-[20px] shadow-lg border border-outline-variant p-6 mou-preview-card transform -rotate-2 float-anim relative z-10">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<div class="h-2 w-24 bg-primary/20 rounded"></div>
+<div class="h-2 w-16 bg-primary/10 rounded"></div>
+</div>
+<span class="material-symbols-outlined text-primary/30">gavel</span>
+</div>
+<div class="space-y-4 py-4">
+<div class="flex items-center gap-3">
+<div class="h-4 w-4 rounded-full border-2 border-primary/20"></div>
+<div class="h-2 w-full bg-surface-container-highest rounded"></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-4 w-4 rounded-full border-2 border-primary/20"></div>
+<div class="h-2 w-3/4 bg-surface-container-highest rounded"></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-4 w-4 rounded-full border-2 border-primary/20"></div>
+<div class="h-2 w-1/2 bg-surface-container-highest rounded"></div>
+</div>
+</div>
+<div class="mt-8 flex justify-between items-end border-t border-dashed border-outline-variant pt-6">
+<div class="space-y-2">
+<div class="h-6 w-20 bg-secondary-container/20 rounded-md"></div>
+<p class="text-[8px] font-label-md text-outline">PARTNER A</p>
+</div>
+<div class="space-y-2 text-right">
+<div class="h-6 w-20 bg-primary-container/20 rounded-md ml-auto"></div>
+<p class="text-[8px] font-label-md text-outline">PARTNER B</p>
+</div>
+</div>
+</div>
+<!-- Decorative shadow element -->
+<div class="absolute inset-0 bg-primary/5 rounded-[20px] transform rotate-1 scale-105 -z-0"></div>
+</div>
+<!-- Guided Form Card -->
+<section class="bg-white rounded-[20px] shadow-sm border border-outline-variant p-card-inner-padding space-y-stack-gap">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">edit_note</span>
+<h2 class="font-headline-sm text-headline-sm">Drafting Details</h2>
+</div>
+<!-- Field: Profit Split -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block">Profit Split</label>
+<div class="relative group">
+<input class="w-full h-tap-target-min bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg px-4 font-body-md transition-all group-hover:bg-surface-container" readonly="" type="text" value="50:50"/>
+<span class="absolute right-4 top-3 material-symbols-outlined text-outline">pie_chart</span>
+</div>
+</div>
+<!-- Field: Exit Rule -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block">Exit Rule</label>
+<div class="relative group">
+<input class="w-full h-tap-target-min bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg px-4 font-body-md transition-all group-hover:bg-surface-container" readonly="" type="text" value="3-month notice"/>
+<span class="absolute right-4 top-3 material-symbols-outlined text-outline">logout</span>
+</div>
+</div>
+<!-- Field: Roles -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block">Roles & Responsibilities</label>
+<div class="relative group">
+<textarea class="w-full min-h-[80px] bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg px-4 py-3 font-body-md transition-all group-hover:bg-surface-container" readonly="">Operations & Marketing</textarea>
+<span class="absolute right-4 top-3 material-symbols-outlined text-outline">badge</span>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-primary text-on-primary h-tap-target-min rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined">description</span>
+                    Generate MoU
+                </button>
+<p class="text-center text-[11px] mt-3 text-outline px-4 italic">
+                    By clicking generate, you create a non-binding digital handshake agreement stored in your partner vault.
+                </p>
+</div>
+</section>
+<!-- Help/Info Card (Bento Style) -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-secondary-fixed text-on-secondary-fixed p-4 rounded-[20px] space-y-2">
+<span class="material-symbols-outlined">verified_user</span>
+<h3 class="font-label-md text-[14px]">Encrypted</h3>
+<p class="text-[10px] leading-tight opacity-80">All drafts are E2E encrypted between partners.</p>
+</div>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed p-4 rounded-[20px] space-y-2">
+<span class="material-symbols-outlined">share</span>
+<h3 class="font-label-md text-[14px]">Invite</h3>
+<p class="text-[10px] leading-tight opacity-80">Share the link with your co-founder to sign.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-inverse-surface shadow-lg rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Expenses</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">store</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 scale-90">
+<span class="material-symbols-outlined">more_horiz</span>
+<span class="font-label-md text-label-md">More</span>
+</button>
+</nav>
+<script>
+        // Simple micro-interaction for the "Generate" button
+        document.querySelector('button.bg-primary').addEventListener('click', function() {
+            const btn = this;
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Generating...`;
+            btn.classList.add('opacity-80');
+            
+            setTimeout(() => {
+                btn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Ready to Sign`;
+                btn.classList.replace('bg-primary', 'bg-secondary-container');
+                btn.classList.replace('text-on-primary', 'text-on-secondary-container');
+                
+                // Visual feedback on the preview card
+                const preview = document.querySelector('.mou-preview-card');
+                preview.style.borderColor = '#fea619';
+                preview.classList.add('scale-105');
+                setTimeout(() => preview.classList.remove('scale-105'), 300);
+            }, 1500);
+        });
+    </script>
+</body></html>

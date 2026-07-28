@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vendor Directory - Investor's Bucket</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fea619",
+                        "inverse-on-surface": "#f1f1f0",
+                        "on-background": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#575250",
+                        "surface-container-high": "#e8e8e7",
+                        "on-secondary-container": "#684000",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-bright": "#f9f9f8",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#1b6b51",
+                        "on-primary-fixed": "#002116",
+                        "on-tertiary-fixed": "#1e1b19",
+                        "on-surface-variant": "#3f4944",
+                        "primary": "#004532",
+                        "secondary": "#855300",
+                        "tertiary-fixed": "#e9e1dd",
+                        "surface": "#f9f9f8",
+                        "on-tertiary-container": "#cdc6c2",
+                        "tertiary": "#3f3b39",
+                        "surface-container-low": "#f3f4f3",
+                        "primary-fixed-dim": "#8bd6b6",
+                        "inverse-surface": "#2f3130",
+                        "outline-variant": "#bec9c2",
+                        "inverse-primary": "#8bd6b6",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-tertiary-fixed-variant": "#4a4643",
+                        "surface-dim": "#dadad9",
+                        "error": "#ba1a1a",
+                        "primary-container": "#065f46",
+                        "background": "#f9f9f8",
+                        "tertiary-fixed-dim": "#ccc5c2",
+                        "on-primary-fixed-variant": "#00513b",
+                        "on-primary-container": "#8bd6b7",
+                        "outline": "#6f7973",
+                        "surface-container": "#eeeeed",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2a1700",
+                        "primary-fixed": "#a6f2d1",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-container-highest": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-inner-padding": "20px",
+                        "tap-target-min": "48px",
+                        "stack-gap": "16px",
+                        "container-padding": "20px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "currency-display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "currency-display": ["28px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #fafaf9; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .vendor-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .vendor-card.active {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(6, 95, 70, 0.1);
+        }
+        .history-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .vendor-card.active .history-content {
+            max-height: 500px;
+        }
+        .vendor-card.active .expand-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim shadow-[0_4px_12px_rgba(6,95,70,0.05)] flex justify-between items-center px-container-padding h-tap-target-min w-full fixed top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young Indian entrepreneur with a warm smile, wearing a modern linen shirt. The background is a soft-focus office setting with warm sunlight filtering through plants, reflecting a blend of corporate trust and approachable warmth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5v9w4mUzLPt7GyAHqnORpbZz8N8zy_hMrH_Jkm4FAXxwHMy18TcBQFKt93C1LqTHxLXdkGvhfRFGLx6aBr1u6wF2pOTccgMVkjJL3Ua8MxVNrzy0B2ej1rLDW7bkEeXol0_QfXun1go4oiTLp6im7ojKmwC42AdreKVkJBVycqZOJymDMygE-qAA5j4EoQ3NBjmZOhyhib42sMGNxoyd1s9EQ_gxBFQdDijWPC3NklEv5GzAIxV_N"/>
+</div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Investor's Bucket</h1>
+</div>
+<button class="w-tap-target-min h-tap-target-min flex items-center justify-center text-primary dark:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors rounded-full active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="flex-1 mt-20 mb-24 px-container-padding">
+<!-- Search Section -->
+<div class="mb-6">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 text-body-md placeholder:text-outline-variant transition-all shadow-sm" placeholder="Search vendors by name or UPI..." type="text"/>
+</div>
+</div>
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-white p-5 rounded-[20px] shadow-[0_4px_12px_rgba(6,95,70,0.05)] border border-[#e7e5e4]">
+<p class="font-label-md text-label-md text-on-surface-variant mb-1 uppercase tracking-wider">Total Vendors</p>
+<p class="font-headline-md text-headline-md text-primary">24</p>
+</div>
+<div class="bg-white p-5 rounded-[20px] shadow-[0_4px_12px_rgba(6,95,70,0.05)] border border-[#e7e5e4]">
+<p class="font-label-md text-label-md text-on-surface-variant mb-1 uppercase tracking-wider">Month Payout</p>
+<p class="font-headline-md text-headline-md text-secondary">₹3.8L</p>
+</div>
+</div>
+<!-- Vendor List -->
+<div class="space-y-4">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-4">All Vendors</h2>
+<!-- Vendor Card: SS Interiors -->
+<div class="vendor-card bg-white rounded-[20px] shadow-[0_4px_12px_rgba(6,95,70,0.05)] border border-[#e7e5e4] overflow-hidden cursor-pointer" onclick="this.classList.toggle('active')">
+<div class="p-card-inner-padding flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold">
+                            SS
+                        </div>
+<div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface">SS Interiors</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">interiors@paytm</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-3">
+<div>
+<p class="font-label-md text-label-md text-outline uppercase tracking-tighter">Total Paid</p>
+<p class="font-body-md text-body-md font-bold text-primary">₹2,10,000</p>
+</div>
+<span class="material-symbols-outlined expand-icon transition-transform duration-300 text-outline">expand_more</span>
+</div>
+</div>
+<!-- Collapsible History -->
+<div class="history-content border-t border-outline-variant/30 bg-surface-container-lowest">
+<div class="p-card-inner-padding">
+<p class="font-label-md text-label-md text-primary mb-3 uppercase tracking-widest">Payment History</p>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+<div>
+<p class="text-body-sm font-bold">Lobby Renovation (Phase 2)</p>
+<p class="text-xs text-outline">Oct 12, 2023</p>
+</div>
+<p class="text-body-sm font-bold">₹1,50,000</p>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+<div>
+<p class="text-body-sm font-bold">Material Advance</p>
+<p class="text-xs text-outline">Sep 28, 2023</p>
+</div>
+<p class="text-body-sm font-bold">₹60,000</p>
+</div>
+</div>
+<button class="w-full mt-4 py-3 bg-primary-fixed text-on-primary-fixed-variant rounded-xl font-label-md hover:bg-primary-fixed-dim transition-colors">
+                            VIEW ALL RECEIPTS
+                        </button>
+</div>
+</div>
+</div>
+<!-- Vendor Card: Raj Hardware -->
+<div class="vendor-card bg-white rounded-[20px] shadow-[0_4px_12px_rgba(6,95,70,0.05)] border border-[#e7e5e4] overflow-hidden cursor-pointer" onclick="this.classList.toggle('active')">
+<div class="p-card-inner-padding flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold">
+                            RH
+                        </div>
+<div>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface">Raj Hardware</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">raj@okicici</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-3">
+<div>
+<p class="font-label-md text-label-md text-outline uppercase tracking-tighter">Total Paid</p>
+<p class="font-body-md text-body-md font-bold text-primary">₹45,000</p>
+</div>
+<span class="material-symbols-outlined expand-icon transition-transform duration-300 text-outline">expand_more</span>
+</div>
+</div>
+<!-- Collapsible History -->
+<div class="history-content border-t border-outline-variant/30 bg-surface-container-lowest">
+<div class="p-card-inner-padding">
+<p class="font-label-md text-label-md text-primary mb-3 uppercase tracking-widest">Payment History</p>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+<div>
+<p class="text-body-sm font-bold">Electrical Fittings</p>
+<p class="text-xs text-outline">Oct 05, 2023</p>
+</div>
+<p class="text-body-sm font-bold">₹22,000</p>
+</div>
+<div class="flex justify-between items-center py-2">
+<div>
+<p class="text-body-sm font-bold">Plumbing Supplies</p>
+<p class="text-xs text-outline">Sep 15, 2023</p>
+</div>
+<p class="text-body-sm font-bold">₹23,000</p>
+</div>
+</div>
+<button class="w-full mt-4 py-3 bg-primary-fixed text-on-primary-fixed-variant rounded-xl font-label-md hover:bg-primary-fixed-dim transition-colors">
+                            VIEW ALL RECEIPTS
+                        </button>
+</div>
+</div>
+</div>
+<!-- More Vendors List Item Style -->
+<div class="bg-surface-container-low rounded-[20px] p-5 flex items-center justify-between border border-dashed border-outline-variant/50 opacity-60">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">person_add</span>
+</div>
+<p class="font-body-md text-on-surface-variant italic">Add new vendor...</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface dark:bg-inverse-surface shadow-lg rounded-t-xl flex justify-around items-center px-4 py-2 h-20">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Expenses</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 scale-90 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">store</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">more_horiz</span>
+<span class="font-label-md text-label-md">More</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for vendor cards
+        document.querySelectorAll('.vendor-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.classList.add('opacity-80');
+            });
+            card.addEventListener('touchend', function() {
+                this.classList.remove('opacity-80');
+            });
+        });
+    </script>
+</body></html>

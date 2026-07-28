@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Investor's Bucket - Pending Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #f9f9f8;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #e7e5e4;
+        }
+        .status-chip {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-container": "#fea619",
+                      "inverse-on-surface": "#f1f1f0",
+                      "on-background": "#1a1c1c",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#575250",
+                      "surface-container-high": "#e8e8e7",
+                      "on-secondary-container": "#684000",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "surface-bright": "#f9f9f8",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#1b6b51",
+                      "on-primary-fixed": "#002116",
+                      "on-tertiary-fixed": "#1e1b19",
+                      "on-surface-variant": "#3f4944",
+                      "primary": "#004532",
+                      "secondary": "#855300",
+                      "tertiary": "#3f3b39",
+                      "surface": "#f9f9f8",
+                      "on-tertiary-container": "#cdc6c2",
+                      "surface-container-low": "#f3f4f3",
+                      "primary-fixed-dim": "#8bd6b6",
+                      "inverse-surface": "#2f3130",
+                      "outline-variant": "#bec9c2",
+                      "inverse-primary": "#8bd6b6",
+                      "surface-variant": "#e2e2e2",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-tertiary-fixed-variant": "#4a4643",
+                      "surface-dim": "#dadad9",
+                      "error": "#ba1a1a",
+                      "primary-container": "#065f46",
+                      "background": "#f9f9f8",
+                      "tertiary-fixed-dim": "#ccc5c2",
+                      "on-primary-fixed-variant": "#00513b",
+                      "on-primary-container": "#8bd6b7",
+                      "outline": "#6f7973",
+                      "surface-container": "#eeeeed",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed": "#2a1700",
+                      "primary-fixed": "#a6f2d1",
+                      "on-surface": "#1a1c1c",
+                      "secondary-fixed": "#ffddb8",
+                      "surface-container-highest": "#e2e2e2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "card-inner-padding": "20px",
+                      "tap-target-min": "48px",
+                      "stack-gap": "16px",
+                      "container-padding": "20px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "body-lg": ["Inter"],
+                      "headline-sm": ["Plus Jakarta Sans"],
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "currency-display": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "currency-display": ["28px", {"lineHeight": "32px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-surface-dim shadow-[0_4px_12px_rgba(6,95,70,0.05)] flex justify-between items-center px-container-padding h-tap-target-min w-full fixed top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female investor in a modern minimalist office setting. The lighting is warm and natural, casting soft shadows against a warm beige background. She wears a dark emerald professional blazer, reflecting the brand's primary color palette for a cohesive, trust-oriented fintech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdP21C9eEWfTp6_uPV2MuwXerSrGS7noVE_dwgBgnGBo9iCts4CpQm9QapjxF1gjHT_IdqdcyP_VWlmZUkHLEHRkR-3ZUWEze1gNl3-x3poTq9x_lLZ22bzSfwMrAahLZODhTVyGRvft_w1lDF2vgqvdajWRlollYDKt1Do66QDTjM7Kajs8SLIaSv0EqhrPKzc_jPPoT67A3i52D-NICW8kbalmgqsKS2x8XhP41eGufZOC0gALGR"/>
+</div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Investor's Bucket</h1>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+            notifications
+        </button>
+</header>
+<main class="mt-20 px-container-padding space-y-stack-gap">
+<!-- Header Info -->
+<section class="mb-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Verification Queue</p>
+<h2 class="font-headline-md text-headline-md text-primary mt-1">Pending Approval</h2>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full flex items-center gap-1.5 animate-pulse">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-label-md text-label-md">48h left</span>
+</div>
+</div>
+</section>
+<!-- Featured Detail Card (High Priority) -->
+<div class="glass-card rounded-2xl p-card-inner-padding shadow-lg space-y-4 border-l-4 border-l-secondary relative overflow-hidden">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<span class="bg-secondary/10 text-secondary status-chip font-label-md text-[10px] uppercase tracking-widest">Pending Verification</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">SS Interiors</h3>
+</div>
+<p class="font-currency-display text-currency-display text-primary">₹85,000</p>
+</div>
+<div class="flex items-center gap-4 py-2 border-y border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">category</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Interiors</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 24, 2023</span>
+</div>
+</div>
+<div class="space-y-3">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Partial payment for reception area remodeling and premium lighting fixtures installation.</p>
+<div class="flex gap-3 pt-2">
+<button class="flex-1 bg-primary text-on-primary h-tap-target-min rounded-xl font-label-md flex items-center justify-center gap-2 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined">check_circle</span>
+                        Approve
+                    </button>
+<button class="flex-1 bg-secondary-fixed text-on-secondary-fixed h-tap-target-min rounded-xl font-label-md flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined">error</span>
+                        Dispute
+                    </button>
+</div>
+</div>
+<!-- Subtle background texture for the premium card -->
+<div class="absolute top-0 right-0 opacity-[0.03] pointer-events-none">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+</div>
+<!-- Other Items in Queue -->
+<section class="space-y-stack-gap">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase pt-4">Other Items (2)</h3>
+<!-- Queue Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex items-center justify-between border border-outline-variant/20">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">wifi_calling</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-bold">Airtel Business</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Internet &amp; Data</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md font-bold text-on-surface">₹4,200</p>
+<span class="text-[10px] text-secondary font-bold">24h left</span>
+</div>
+</div>
+<!-- Queue Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex items-center justify-between border border-outline-variant/20">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">print</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-bold">Kwick Print</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Marketing collateral</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md font-bold text-on-surface">₹12,450</p>
+<span class="text-[10px] text-secondary font-bold">36h left</span>
+</div>
+</div>
+</section>
+<!-- Attachment Preview Section (Modern Pattern) -->
+<section class="pt-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-3">Verification Documents</h3>
+<div class="flex gap-4 overflow-x-auto pb-4 -mx-container-padding px-container-padding snap-x">
+<div class="snap-start flex-shrink-0 w-32 aspect-[3/4] rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="A clean, high-resolution scan of a business invoice from SS Interiors. The document features a professional logo, detailed line items for 'Wall Treatments' and 'Luminaries', and a clear stamp of authenticity. The lighting is even and flat, typical of a document scanner, maintaining the professional fintech vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0Hir0wcXH1-mqtMmA8pNRhsOSOoBylzWoGUIOoJ4H_agZ3Dls3uC1MEdzE4J7UhS6xB1HhCHrPRshQZY2xWhZ1qwLkKN5gztBloNIX5jaxgWJiw83w6bvtXJhAQ6u0UW3ZtKyVLsYZLMD_1acOv104vpCWeiIUKEzJgfSsNsEtMpi2No8mXtcenzjIRYUJ4AyND53GNRqT4P1LdHN44N9y8S3rqrlgZ-N_h7LEAwwD-AzV3kxvIhX"/>
+<div class="absolute inset-0 bg-primary/20 group-active:bg-primary/40 transition-colors flex items-end p-2">
+<span class="text-white text-[10px] font-bold">Invoice_85K.pdf</span>
+</div>
+</div>
+<div class="snap-start flex-shrink-0 w-32 aspect-[3/4] rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="A sharp, clear photograph of a newly renovated office interior showcasing elegant wall paneling and warm ambient lighting. The style is modern corporate with deep emerald and oak wood accents. The photograph is professionally taken with a wide-angle lens, showing high-quality architectural craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkW6CY5eoCHISTuB0w0rYUCeCXuipkWEWoCypuazTKttSKXjq2AkBBieZ6VuUu0se1Y1xeIRX98GX9ahVojgMfp-LiNH2srNMcRyoUt37nb_cn5CYtaoX9EWTjnEOZ60VbhrhGnrrFszOX1DluzlsbYvEAe1E85DRLd2sd_tXH0qrcoEg5sbvw3Js3gkrX1cnpBO8UdrFXk8wtacuk4n9qopkVs4XXS3JZSib4e-OwexCd8apNBrmt"/>
+<div class="absolute inset-0 bg-primary/20 group-active:bg-primary/40 transition-colors flex items-end p-2">
+<span class="text-white text-[10px] font-bold">Site_Photo_1.jpg</span>
+</div>
+</div>
+<div class="snap-start flex-shrink-0 w-32 aspect-[3/4] rounded-xl border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant bg-surface-container-low">
+<span class="material-symbols-outlined text-[32px]">add_circle</span>
+<span class="font-label-md text-[10px] mt-1">Add Proof</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-inverse-surface shadow-lg rounded-t-xl">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<!-- Expenses (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-md text-label-md mt-1">Expenses</span>
+</a>
+<!-- Vendors -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">store</span>
+<span class="font-label-md text-label-md mt-1">Vendors</span>
+</a>
+<!-- More -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">more_horiz</span>
+<span class="font-label-md text-label-md mt-1">More</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.classList.add('opacity-80', 'scale-95');
+            });
+            btn.addEventListener('touchend', function() {
+                this.classList.remove('opacity-80', 'scale-95');
+            });
+        });
+
+        // Simple countdown logic simulation
+        let hours = 47;
+        let mins = 59;
+        const countdownEl = document.querySelector('.animate-pulse .font-label-md');
+        
+        setInterval(() => {
+            if (mins > 0) {
+                mins--;
+            } else {
+                hours--;
+                mins = 59;
+            }
+            if (countdownEl) {
+                countdownEl.innerText = `${hours}h ${mins}m left`;
+            }
+        }, 60000);
+    </script>
+</body></html>

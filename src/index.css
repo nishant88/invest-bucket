@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    position: relative;
+    background-color: #f4f8ee;
+    background-image: 
+      radial-gradient(at 50% 0%, rgba(6, 95, 70, 0.08) 0, transparent 60%),
+      radial-gradient(at 0% 100%, rgba(6, 95, 70, 0.03) 0, transparent 40%);
+    background-attachment: fixed;
+    background-size: cover;
+    color: #0f172a;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Premium Light Glassmorphism Base Styles */
+.glassmorphism {
+  background: #ecf3e3 !important;
+  backdrop-filter: blur(32px) saturate(210%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(210%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    0 12px 36px -12px rgba(6, 95, 70, 0.04),
+    0 2px 4px 0 rgba(0, 0, 0, 0.01) !important;
+}
+
+/* Card glass styles */
+section.bg-white,
+div.card-shadow.bg-white,
+div.bg-white.rounded-2xl,
+div.bg-white.rounded-3xl,
+div.bg-white.rounded-\[20px\],
+div.bg-white.rounded-\[28px\] {
+  background: #ecf3e3 !important;
+  backdrop-filter: blur(32px) saturate(210%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(210%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 28px !important;
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    0 12px 36px -12px rgba(6, 95, 70, 0.04),
+    0 2px 4px 0 rgba(0, 0, 0, 0.01) !important;
+}
+
+/* Modal overlays */
+.modal-overlay {
+  background: rgba(6, 35, 25, 0.25) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Input fields & selectors - Styled according to Stripe Sage screenshot */
+input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-radius: 18px !important;
+  padding: 13px 18px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  color: #0f172a !important;
+  box-shadow: none !important;
+}
+input:not([type="checkbox"]):not([type="radio"]):focus, select:focus, textarea:focus {
+  background: #ffffff !important;
+  outline: 2px solid #065f46 !important;
+  box-shadow: 0 4px 12px rgba(6, 95, 70, 0.06) !important;
+}
+
+/* Unified transitions & interactive lifts */
+.hover-scale {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-scale:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -16px rgba(0, 69, 50, 0.12) !important;
+}
+.hover-scale:active {
+  transform: translateY(0.5px);
+}
+
+/* OCR vertical neon animation */
+.scanning-line {
+  animation: scan 2.5s infinite ease-in-out;
+}
+@keyframes scan {
+  0%, 100% {
+    top: 0%;
+    opacity: 0.8;
+  }
+  50% {
+    top: 100%;
+    opacity: 1;
+  }
+}
+
+/* Card entry fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* SVG ring segment scale-up animation */
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Milestone Vault - Investor's Bucket</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-container": "#fea619",
+                      "inverse-on-surface": "#f1f1f0",
+                      "on-background": "#1a1c1c",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#575250",
+                      "surface-container-high": "#e8e8e7",
+                      "on-secondary-container": "#684000",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "surface-bright": "#f9f9f8",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#1b6b51",
+                      "on-primary-fixed": "#002116",
+                      "on-tertiary-fixed": "#1e1b19",
+                      "on-surface-variant": "#3f4944",
+                      "primary": "#004532",
+                      "secondary": "#855300",
+                      "tertiary-fixed": "#e9e1dd",
+                      "surface": "#f9f9f8",
+                      "on-tertiary-container": "#cdc6c2",
+                      "tertiary": "#3f3b39",
+                      "surface-container-low": "#f3f4f3",
+                      "primary-fixed-dim": "#8bd6b6",
+                      "inverse-surface": "#2f3130",
+                      "outline-variant": "#bec9c2",
+                      "inverse-primary": "#8bd6b6",
+                      "surface-variant": "#e2e2e2",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "on-tertiary-fixed-variant": "#4a4643",
+                      "surface-dim": "#dadad9",
+                      "error": "#ba1a1a",
+                      "primary-container": "#065f46",
+                      "background": "#f9f9f8",
+                      "tertiary-fixed-dim": "#ccc5c2",
+                      "on-primary-fixed-variant": "#00513b",
+                      "on-primary-container": "#8bd6b7",
+                      "outline": "#6f7973",
+                      "surface-container": "#eeeeed",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed": "#2a1700",
+                      "primary-fixed": "#a6f2d1",
+                      "on-surface": "#1a1c1c",
+                      "secondary-fixed": "#ffddb8",
+                      "surface-container-highest": "#e2e2e2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "card-inner-padding": "20px",
+                      "tap-target-min": "48px",
+                      "stack-gap": "16px",
+                      "container-padding": "20px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "body-lg": ["Inter"],
+                      "headline-sm": ["Plus Jakarta Sans"],
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "currency-display": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "currency-display": ["28px", {"lineHeight": "32px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        body {
+            background-color: #fafaf9;
+            color: #1a1c1c;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .milestone-track::before {
+            content: '';
+            position: absolute;
+            left: 23px;
+            top: 40px;
+            bottom: 40px;
+            width: 2px;
+            background: repeating-linear-gradient(to bottom, #bec9c2 0px, #bec9c2 4px, transparent 4px, transparent 8px);
+            z-index: 0;
+        }
+        .milestone-track-completed::before {
+            background: #065f46;
+        }
+        .custom-shadow {
+            box-shadow: 0 4px 12px rgba(6, 95, 70, 0.05);
+        }
+        .bento-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-container-padding h-tap-target-min w-full fixed top-0 z-50 bg-surface dark:bg-surface-dim shadow-[0_4px_12px_rgba(6,95,70,0.05)]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a business partner in a bright, modern office with lush green plants in the background. The lighting is soft and natural, emphasizing a warm and trustworthy personality. High-quality corporate portrait photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHSI8944vK1k8GTDCX40UKl7J6tp-wTQyJjezvpa6Rl4VtiWE4sUyl6_qGzKLydBv7gZ8zbA4CV2Ty-c0F5FrbLM6WyREeqoEwWIwmZmMM8AxSKmxmIFdWs0dL9ZeXL_y1GcRAjP_fJt_4IpWtAj4Dq95hRQn1ibOSSz3YBsHfrvFtqxRwjUnMPKoMN7GfolwkBDMR_gWFxfpULhQWK-V-8Kbf3MYxgVTG1S2ez0fVLUdDqJIBghAE"/>
+</div>
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Investor's Bucket</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-tap-target-min h-tap-target-min flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-primary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-28 px-container-padding max-w-md mx-auto">
+<!-- Progress Hero Card -->
+<section class="mb-8">
+<div class="bg-primary-container text-on-primary-container p-6 rounded-[20px] shadow-lg relative overflow-hidden bento-card">
+
+<div class="relative z-10">
+<p class="font-label-md text-label-md uppercase tracking-wider opacity-80 mb-1">Vault Health</p>
+<h1 class="font-display-lg text-display-lg mb-4">Total Vault Progress: 45%</h1>
+<div class="w-full h-3 bg-white/20 rounded-full overflow-hidden mb-6">
+<div class="h-full bg-on-primary-container w-[45%] rounded-full shadow-[0_0_8px_rgba(139,214,183,0.5)]"></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+<p class="font-label-md text-label-md opacity-70">Milestones Done</p>
+<p class="font-headline-sm text-headline-sm">1 / 3</p>
+</div>
+<div class="bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+<p class="font-label-md text-label-md opacity-70">Active Spend</p>
+<p class="font-headline-sm text-headline-sm">₹3.0L</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="space-y-6 relative">
+<h2 class="font-headline-sm text-headline-sm text-primary px-1">Project Roadmap</h2>
+<div class="relative space-y-8">
+<!-- Milestone 1: Completed -->
+<div class="flex gap-6 milestone-track milestone-track-completed relative">
+<div class="relative z-10">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-md">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="flex-1 bg-white p-5 rounded-[20px] border border-outline-variant/30 custom-shadow bento-card">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="bg-primary/10 text-primary font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase mb-1 inline-block">Milestone 01</span>
+<h3 class="font-headline-sm text-headline-sm">Civil Works</h3>
+</div>
+<span class="bg-primary-container/10 text-primary-container font-label-md text-label-md px-2 py-1 rounded-lg">Verified</span>
+</div>
+<p class="text-on-surface-variant font-body-sm text-body-sm mb-4">Structural integrity, plumbing, and electrical grid completed successfully.</p>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl border border-outline-variant/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="description">description</span>
+<span class="font-body-sm text-body-sm">Structural Audit Report</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestone 2: In Progress -->
+<div class="flex gap-6 milestone-track relative">
+<div class="relative z-10">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shadow-md">
+<span class="material-symbols-outlined" data-icon="pending" style="font-variation-settings: 'FILL' 1;">pending</span>
+</div>
+</div>
+<div class="flex-1 bg-white p-5 rounded-[20px] border border-outline-variant/30 custom-shadow bento-card border-l-4 border-l-secondary-container">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="bg-secondary-container/10 text-on-secondary-container font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase mb-1 inline-block">Milestone 02</span>
+<h3 class="font-headline-sm text-headline-sm">Furniture &amp; Decor</h3>
+</div>
+<span class="bg-secondary-container text-white font-label-md text-label-md px-2 py-1 rounded-lg">In Progress</span>
+</div>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-currency-display text-currency-display text-primary">₹3,00,000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">spent so far</span>
+</div>
+<!-- Grouped Expenses -->
+<div class="space-y-3">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase">Recent Expenses</p>
+<div class="p-3 bg-surface-container-lowest rounded-xl border border-outline-variant/40 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" data-icon="chair">chair</span>
+</div>
+<div>
+<p class="font-body-md text-body-md">Custom Sofa Set</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Urban Ladder • 2 days ago</p>
+</div>
+</div>
+<p class="font-label-md text-label-md text-primary">₹1,80,000</p>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded-xl border border-outline-variant/40 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" data-icon="light">light</span>
+</div>
+<div>
+<p class="font-body-md text-body-md">Ambient Lighting</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Philips Hue • 5 days ago</p>
+</div>
+</div>
+<p class="font-label-md text-label-md text-primary">₹1,20,000</p>
+</div>
+<button class="w-full py-2 text-primary font-label-md text-label-md hover:bg-surface-container rounded-lg transition-all border border-dashed border-primary/30">
+                                View all 8 items
+                            </button>
+</div>
+</div>
+</div>
+<!-- Milestone 3: Locked -->
+<div class="flex gap-6 relative">
+<div class="relative z-10 opacity-50">
+<div class="w-12 h-12 rounded-full bg-outline-variant flex items-center justify-center text-on-surface-variant shadow-sm">
+<span class="material-symbols-outlined" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container/50 p-5 rounded-[20px] border border-outline-variant/20 opacity-60">
+<span class="bg-on-surface-variant/10 text-on-surface-variant font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase mb-1 inline-block">Milestone 03</span>
+<h3 class="font-headline-sm text-headline-sm">License &amp; Launch</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm mt-2">Unlock after Milestone 02 reaches 90% completion.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Asymmetric CTA Section -->
+<section class="mt-12">
+<div class="bg-surface-container-lowest p-6 rounded-[24px] border border-outline-variant/40 custom-shadow flex flex-col md:flex-row gap-6 items-center">
+<div class="w-20 h-20 bg-primary/5 rounded-2xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="request_quote">request_quote</span>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h4 class="font-headline-sm text-headline-sm mb-1">Fund Next Phase?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Milestone 2 requires an additional ₹2.5L to maintain the current project velocity.</p>
+<button class="bg-primary text-white font-label-md text-label-md px-6 py-3 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all w-full md:w-auto">
+                        Approve Funding
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-inverse-surface shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-md text-label-md">Expenses</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="store">store</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+<span class="font-label-md text-label-md">More</span>
+</a>
+</nav>
+<!-- Micro-interaction script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bento-card');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', () => {
+                    card.classList.add('scale-95', 'opacity-90');
+                });
+                card.addEventListener('touchend', () => {
+                    card.classList.remove('scale-95', 'opacity-90');
+                });
+            });
+        });
+    </script>
+</body></html>

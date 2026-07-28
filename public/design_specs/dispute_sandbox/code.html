@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dispute Sandbox - Investor's Bucket</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .voice-wave {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 20px;
+        }
+        .wave-bar {
+            width: 3px;
+            background: currentColor;
+            border-radius: 1px;
+            animation: wave 1.2s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { height: 4px; }
+            50% { height: 16px; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fea619",
+                        "inverse-on-surface": "#f1f1f0",
+                        "on-background": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#575250",
+                        "surface-container-high": "#e8e8e7",
+                        "on-secondary-container": "#684000",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-bright": "#f9f9f8",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#1b6b51",
+                        "on-primary-fixed": "#002116",
+                        "on-tertiary-fixed": "#1e1b19",
+                        "on-surface-variant": "#3f4944",
+                        "primary": "#004532",
+                        "secondary": "#855300",
+                        "tertiary-fixed": "#e9e1dd",
+                        "surface": "#f9f9f8",
+                        "on-tertiary-container": "#cdc6c2",
+                        "tertiary": "#3f3b39",
+                        "surface-container-low": "#f3f4f3",
+                        "primary-fixed-dim": "#8bd6b6",
+                        "inverse-surface": "#2f3130",
+                        "outline-variant": "#bec9c2",
+                        "inverse-primary": "#8bd6b6",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-tertiary-fixed-variant": "#4a4643",
+                        "surface-dim": "#dadad9",
+                        "error": "#ba1a1a",
+                        "primary-container": "#065f46",
+                        "background": "#f9f9f8",
+                        "tertiary-fixed-dim": "#ccc5c2",
+                        "on-primary-fixed-variant": "#00513b",
+                        "on-primary-container": "#8bd6b7",
+                        "outline": "#6f7973",
+                        "surface-container": "#eeeeed",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2a1700",
+                        "primary-fixed": "#a6f2d1",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-container-highest": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-inner-padding": "20px",
+                        "tap-target-min": "48px",
+                        "stack-gap": "16px",
+                        "container-padding": "20px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "currency-display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "currency-display": ["28px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col pb-32">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-container-padding h-tap-target-min w-full fixed top-0 z-50 bg-surface dark:bg-surface-dim shadow-[0_4px_12px_rgba(6,95,70,0.05)]">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Dispute Sandbox</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a young Indian male entrepreneur with a friendly and confident expression. He is wearing a minimalist linen shirt, set against a warm, soft-focus office background with natural indoor plants. The lighting is soft and golden, conveying warmth and approachability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBltjroqZx9knOcNhpr8UKUMkaWoda1T8-L9VI5m-x11L0aOMQo57nGTtAOpv4lofEVs25sfK4BgHvpTqjnvpGyWyT3D-N6pU_TBhPHa958S6UnRjZrutr-QD_mUctJt0aQyXkeY91Aw6g4nOslhgk5CmEPysqsdZfOLG9i4CcLqdRBiwfmK34zXAMSimVLh8rFFpmGcOvKJyNV0dhi4tt72MdhoXUyRl84o8PbbLn6uItO58mo5Ukb"/>
+</div>
+<span class="material-symbols-outlined text-primary">notifications</span>
+</div>
+</header>
+<main class="mt-20 px-container-padding flex flex-col gap-6 max-w-2xl mx-auto w-full">
+<!-- Top Receipt Card -->
+<section class="bg-surface-container-lowest rounded-xl p-card-inner-padding shadow-[0_4px_12px_rgba(6,95,70,0.05)] border border-outline-variant overflow-hidden relative">
+<div class="absolute top-0 right-0 px-4 py-1 bg-error text-on-error font-label-md text-label-md rounded-bl-xl uppercase tracking-wider">
+                Disputed
+            </div>
+<div class="flex items-start gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-[28px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Marketing Collateral</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">ID: #EXP-2023-8942 • May 14, 2024</p>
+</div>
+</div>
+<div class="flex justify-between items-end border-t border-outline-variant pt-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Total Amount</p>
+<p class="font-currency-display text-currency-display text-primary">₹12,450</p>
+</div>
+<button class="flex items-center gap-2 px-3 py-2 bg-surface-container-low rounded-lg text-primary hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span class="font-label-md text-label-md">View Receipt</span>
+</button>
+</div>
+</section>
+<!-- Chat Thread -->
+<section class="flex flex-col gap-stack-gap">
+<div class="flex items-center gap-3">
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">DISPUTE THREAD</span>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+</div>
+<!-- Partner A Message -->
+<div class="flex gap-3 max-w-[85%] self-start">
+<div class="w-8 h-8 rounded-full flex-shrink-0 bg-primary-container text-on-primary-container flex items-center justify-center text-[10px] font-bold">
+                    PA
+                </div>
+<div class="flex flex-col gap-1">
+<div class="bg-surface-container-high rounded-r-2xl rounded-bl-2xl p-4 text-on-surface shadow-sm">
+<p class="font-body-md text-body-md">This vendor quoted 10k initially. Why 12.4k?</p>
+</div>
+<span class="text-[10px] text-on-surface-variant ml-1 uppercase">Partner A • 10:24 AM</span>
+</div>
+</div>
+<!-- Partner B Message -->
+<div class="flex gap-3 max-w-[85%] self-end flex-row-reverse">
+<div class="w-8 h-8 rounded-full flex-shrink-0 bg-secondary-container text-on-secondary-container flex items-center justify-center text-[10px] font-bold">
+                    PB
+                </div>
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-primary text-on-primary rounded-l-2xl rounded-br-2xl p-4 shadow-md">
+<p class="font-body-md text-body-md">Added ₹2.4k for express delivery of banners for the launch.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant mr-1 uppercase">Partner B • 11:05 AM</span>
+</div>
+</div>
+<!-- Voice Note Placeholder -->
+<div class="flex gap-3 max-w-[85%] self-end flex-row-reverse">
+<div class="w-8 h-8 rounded-full flex-shrink-0 bg-secondary-container text-on-secondary-container flex items-center justify-center text-[10px] font-bold">
+                    PB
+                </div>
+<div class="flex flex-col gap-1 items-end w-full">
+<div class="bg-primary-fixed text-on-primary-fixed rounded-l-2xl rounded-br-2xl p-3 shadow-sm w-full flex items-center gap-3">
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<div class="flex-grow">
+<div class="voice-wave text-primary/40">
+<div class="wave-bar" style="animation-delay: 0.1s; height: 12px;"></div>
+<div class="wave-bar" style="animation-delay: 0.3s; height: 18px;"></div>
+<div class="wave-bar" style="animation-delay: 0.2s; height: 8px;"></div>
+<div class="wave-bar" style="animation-delay: 0.4s; height: 20px;"></div>
+<div class="wave-bar" style="animation-delay: 0.1s; height: 14px;"></div>
+<div class="wave-bar" style="animation-delay: 0.5s; height: 10px;"></div>
+<div class="wave-bar" style="animation-delay: 0.2s; height: 16px;"></div>
+<div class="wave-bar" style="animation-delay: 0.3s; height: 6px;"></div>
+<div class="wave-bar" style="animation-delay: 0.4s; height: 18px;"></div>
+<div class="wave-bar" style="animation-delay: 0.1s; height: 12px;"></div>
+<div class="wave-bar" style="animation-delay: 0.2s; height: 15px;"></div>
+</div>
+</div>
+<span class="font-label-md text-label-md">0:42</span>
+</div>
+<span class="text-[10px] text-on-surface-variant mr-1 uppercase">Partner B • 11:06 AM</span>
+</div>
+</div>
+</section>
+<!-- Message Input Field -->
+<div class="mt-4 flex items-center gap-3 bg-surface-container-lowest border border-outline-variant rounded-full p-2 pl-4 shadow-sm">
+<input class="flex-grow bg-transparent border-none focus:ring-0 text-body-md placeholder:text-on-surface-variant" placeholder="Type a message..." type="text"/>
+<button class="w-10 h-10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</main>
+<!-- Bottom Actions -->
+<footer class="fixed bottom-0 w-full bg-surface border-t border-outline-variant p-container-padding flex gap-4 z-50">
+<button class="flex-1 min-h-[52px] bg-secondary-container text-on-secondary-container font-label-md text-label-md rounded-xl flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined">history</span>
+            REOPEN DISPUTE
+        </button>
+<button class="flex-1 min-h-[52px] bg-primary-container text-on-primary-container font-label-md text-label-md rounded-xl flex items-center justify-center gap-2 shadow-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined">check_circle</span>
+            RESOLVE DISPUTE
+        </button>
+</footer>
+<!-- Simple Interactivity for the voice note -->
+<script>
+        const playBtn = document.querySelector('.bg-primary-fixed button');
+        const waveBars = document.querySelectorAll('.wave-bar');
+        let isPlaying = false;
+
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playBtn.querySelector('span').textContent = isPlaying ? 'pause' : 'play_arrow';
+            
+            waveBars.forEach(bar => {
+                bar.style.animationPlayState = isPlaying ? 'running' : 'paused';
+            });
+        });
+
+        // Initialize wave bars as paused
+        waveBars.forEach(bar => {
+            bar.style.animationPlayState = 'paused';
+        });
+    </script>
+</body></html>

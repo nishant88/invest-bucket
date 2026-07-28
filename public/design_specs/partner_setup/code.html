@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Investor's Bucket - Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fea619",
+                    "inverse-on-surface": "#f1f1f0",
+                    "on-background": "#1a1c1c",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#575250",
+                    "surface-container-high": "#e8e8e7",
+                    "on-secondary-container": "#684000",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "surface-bright": "#f9f9f8",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#1b6b51",
+                    "on-primary-fixed": "#002116",
+                    "on-tertiary-fixed": "#1e1b19",
+                    "on-surface-variant": "#3f4944",
+                    "primary": "#004532",
+                    "secondary": "#855300",
+                    "tertiary-fixed": "#e9e1dd",
+                    "surface": "#f9f9f8",
+                    "on-tertiary-container": "#cdc6c2",
+                    "tertiary": "#3f3b39",
+                    "surface-container-low": "#f3f4f3",
+                    "primary-fixed-dim": "#8bd6b6",
+                    "inverse-surface": "#2f3130",
+                    "outline-variant": "#bec9c2",
+                    "inverse-primary": "#8bd6b6",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#ffb95f",
+                    "on-tertiary-fixed-variant": "#4a4643",
+                    "surface-dim": "#dadad9",
+                    "error": "#ba1a1a",
+                    "primary-container": "#065f46",
+                    "background": "#f9f9f8",
+                    "tertiary-fixed-dim": "#ccc5c2",
+                    "on-primary-fixed-variant": "#00513b",
+                    "on-primary-container": "#8bd6b7",
+                    "outline": "#6f7973",
+                    "surface-container": "#eeeeed",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#2a1700",
+                    "primary-fixed": "#a6f2d1",
+                    "on-surface": "#1a1c1c",
+                    "secondary-fixed": "#ffddb8",
+                    "surface-container-highest": "#e2e2e2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "card-inner-padding": "20px",
+                    "tap-target-min": "48px",
+                    "stack-gap": "16px",
+                    "container-padding": "20px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "currency-display": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "currency-display": ["28px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fafaf9;
+            color: #1a1c1c;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(6, 95, 70, 0.05);
+        }
+        .custom-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 9999px;
+            background: #e7e5e4;
+            outline: none;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #004532;
+            cursor: pointer;
+            border: 4px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- Header (Suppressed as per rules for transactional screen) -->
+<header class="w-full px-container-padding py-6 flex items-center justify-between">
+<button class="w-tap-target-min h-tap-target-min flex items-center justify-start text-primary">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</button>
+<div class="flex-1 text-center">
+<h1 class="font-headline-sm text-headline-sm text-primary font-bold">Investor's Bucket</h1>
+</div>
+<div class="w-tap-target-min"></div>
+</header>
+<main class="flex-1 px-container-padding pb-32">
+<div class="max-w-md mx-auto">
+<!-- Headline Section -->
+<section class="mb-8">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2">Set up your Bucket</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Define your business identity and partner contributions to get started.</p>
+</section>
+<!-- Business Name Input -->
+<section class="mb-stack-gap">
+<div class="bg-surface-container-lowest rounded-xl p-card-inner-padding card-shadow border border-outline-variant/30">
+<label class="block font-label-md text-label-md text-primary uppercase mb-2">Business Name</label>
+<input class="w-full bg-transparent border-b-2 border-outline-variant focus:border-primary transition-colors py-3 px-1 font-body-lg text-body-lg outline-none placeholder:text-outline" placeholder="e.g. Level Up Gaming Zone" type="text"/>
+</div>
+</section>
+<!-- Partners Section -->
+<section class="space-y-stack-gap">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-sm text-headline-sm">Add Partners</h3>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                        ADD NEW
+                    </button>
+</div>
+<!-- Partner Cards -->
+<div class="space-y-4" id="partner-list">
+<!-- Partner 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-card-inner-padding card-shadow border border-outline-variant/30 relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold">
+                                    AM
+                                </div>
+<div>
+<p class="font-headline-sm text-[16px]">Anand Mishra</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Primary Investor</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-display-lg text-headline-md text-secondary" id="split-display-1">50%</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Equity Split</p>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block font-label-md text-label-md text-outline mb-3">Investment Split</label>
+<input class="custom-slider" max="100" min="0" oninput="document.getElementById('split-display-1').innerText = this.value + '%'; document.getElementById('split-display-2').innerText = (100 - this.value) + '%'" step="1" type="range" value="50"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-outline mb-1">Capital Commitment</label>
+<div class="flex items-center border-b border-outline-variant focus-within:border-primary py-2">
+<span class="font-body-lg text-body-lg text-on-surface mr-2">₹</span>
+<input class="w-full bg-transparent border-none p-0 font-currency-display text-headline-sm focus:ring-0 outline-none" type="number" value="25.00"/>
+<span class="font-label-md text-label-md text-on-surface-variant ml-2">Lakhs</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Partner 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-card-inner-padding card-shadow border border-outline-variant/30">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-bold">
+                                    RK
+                                </div>
+<div>
+<p class="font-headline-sm text-[16px]">Rohan Kapoor</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Strategic Partner</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-display-lg text-headline-md text-secondary" id="split-display-2">50%</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Equity Split</p>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-outline mb-1">Capital Commitment</label>
+<div class="flex items-center border-b border-outline-variant focus-within:border-primary py-2">
+<span class="font-body-lg text-body-lg text-on-surface mr-2">₹</span>
+<input class="w-full bg-transparent border-none p-0 font-currency-display text-headline-sm focus:ring-0 outline-none" type="number" value="25.00"/>
+<span class="font-label-md text-label-md text-on-surface-variant ml-2">Lakhs</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Decorative Visual (Bento-style placeholder) -->
+<section class="mt-8 mb-8 grid grid-cols-2 gap-4">
+<div class="h-32 rounded-2xl bg-primary-container p-4 flex flex-col justify-end relative overflow-hidden">
+<div class="absolute -top-4 -right-4 w-16 h-16 bg-white/10 rounded-full blur-xl"></div>
+<span class="material-symbols-outlined text-on-primary-container mb-1">verified_user</span>
+<p class="font-label-md text-on-primary-container text-[10px]">VERIFIED SECURITY</p>
+<p class="text-white font-bold text-sm">Escrow-backed setup</p>
+</div>
+<div class="h-32 rounded-2xl bg-secondary-container p-4 flex flex-col justify-end relative overflow-hidden">
+<div class="absolute -bottom-4 -left-4 w-16 h-16 bg-white/20 rounded-full blur-xl"></div>
+<span class="material-symbols-outlined text-on-secondary-container mb-1">handshake</span>
+<p class="font-label-md text-on-secondary-container text-[10px]">LEGAL READY</p>
+<p class="text-on-secondary-container font-bold text-sm">MoU generated</p>
+</div>
+</section>
+</div>
+</main>
+<!-- Fixed Bottom CTA -->
+<div class="fixed bottom-0 left-0 w-full p-container-padding bg-gradient-to-t from-surface via-surface to-transparent z-50">
+<button class="w-full h-tap-target-min bg-primary text-on-primary rounded-xl font-headline-sm flex items-center justify-center gap-2 active:scale-95 transition-all shadow-lg" id="create-bucket-btn">
+            Create Bucket
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.getElementById('create-bucket-btn').addEventListener('click', function() {
+            this.innerHTML = `
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Creating Bucket...</span>
+            `;
+            setTimeout(() => {
+                this.innerHTML = `
+                    <span class="material-symbols-outlined text-white">check_circle</span>
+                    <span>Bucket Created!</span>
+                `;
+                this.classList.remove('bg-primary');
+                this.classList.add('bg-secondary');
+            }, 1500);
+        });
+
+        // Horizontal Parallax Shift on Move
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 10 - 5;
+            const y = (e.clientY / window.innerHeight) * 10 - 5;
+            const cards = document.querySelectorAll('.card-shadow');
+            cards.forEach(card => {
+                card.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body></html>

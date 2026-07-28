@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Partner Exit Settlement Report</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fafaf9;
+            font-family: 'Inter', sans-serif;
+        }
+        .modern-card {
+            background: #ffffff;
+            border: 1px solid #e7e5e4;
+            box-shadow: 0 4px 12px rgba(6, 95, 70, 0.05);
+            border-radius: 20px;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .status-chip {
+            background-color: rgba(0, 69, 50, 0.1);
+            color: #004532;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .settlement-bg {
+            background: linear-gradient(135deg, #004532 0%, #065f46 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fea619",
+                        "inverse-on-surface": "#f1f1f0",
+                        "on-background": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#575250",
+                        "surface-container-high": "#e8e8e7",
+                        "on-secondary-container": "#684000",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-bright": "#f9f9f8",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#1b6b51",
+                        "on-primary-fixed": "#002116",
+                        "on-tertiary-fixed": "#1e1b19",
+                        "on-surface-variant": "#3f4944",
+                        "primary": "#004532",
+                        "secondary": "#855300",
+                        "tertiary-fixed": "#e9e1dd",
+                        "surface": "#f9f9f8",
+                        "on-tertiary-container": "#cdc6c2",
+                        "tertiary": "#3f3b39",
+                        "surface-container-low": "#f3f4f3",
+                        "primary-fixed-dim": "#8bd6b6",
+                        "inverse-surface": "#2f3130",
+                        "outline-variant": "#bec9c2",
+                        "inverse-primary": "#8bd6b6",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-tertiary-fixed-variant": "#4a4643",
+                        "surface-dim": "#dadad9",
+                        "error": "#ba1a1a",
+                        "primary-container": "#065f46",
+                        "background": "#f9f9f8",
+                        "tertiary-fixed-dim": "#ccc5c2",
+                        "on-primary-fixed-variant": "#00513b",
+                        "on-primary-container": "#8bd6b7",
+                        "outline": "#6f7973",
+                        "surface-container": "#eeeeed",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2a1700",
+                        "primary-fixed": "#a6f2d1",
+                        "on-surface": "#1a1c1c",
+                        "secondary-fixed": "#ffddb8",
+                        "surface-container-highest": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-inner-padding": "20px",
+                        "tap-target-min": "48px",
+                        "stack-gap": "16px",
+                        "container-padding": "20px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "currency-display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "currency-display": ["28px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface antialiased pb-32">
+<!-- Top AppBar (from Shared Components) -->
+<header class="flex justify-between items-center px-container-padding h-tap-target-min w-full fixed top-0 z-50 bg-surface shadow-[0_4px_12px_rgba(6,95,70,0.05)]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of an Indian male business executive, soft studio lighting, corporate attire, warm tones, high-resolution photography, blurred office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALnJ-i0mAidkLZBp6M1WlHaPSJlX-G94sTLpK21QF4VX8A7jNKVnT8yhGHs1_sT6Y7A5nwH4tEd9nNfZm3P8Oi-1P3j1PndNquEO7TETxjk3dIg5uXkuXNZi3j7sRzRQkIDayn2ZY7p1BRceeq4GI0Nrzjh3DDGyacn8xApqxUXxJKdV63BQUL20isRA2fGJNI9CYTWrgraMQSGmc7SYgQ1IDEtI3JsQGLG3WUiuLrcUAZxeP0IqR-"/>
+</div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary">Investor's Bucket</h1>
+</div>
+<button class="w-tap-target-min h-tap-target-min flex items-center justify-center hover:bg-surface-container transition-colors rounded-full text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="mt-20 px-container-padding space-y-stack-gap">
+<!-- Screen Title & Status -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Exit Settlement</h2>
+<span class="status-chip">Ready for Settlement</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Review the final settlement breakdown for Partner A before export.</p>
+</div>
+<!-- Summary Header Card (Asymmetric Layout) -->
+<div class="modern-card p-card-inner-padding settlement-bg relative overflow-hidden text-white">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="relative z-10">
+<p class="font-label-md text-label-md uppercase tracking-wider opacity-80">Net Settlement Amount</p>
+<h3 class="font-display-lg text-display-lg mt-1">₹7,20,000</h3>
+<div class="mt-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+<span class="font-body-sm text-body-sm">Finalized on Oct 24, 2023</span>
+</div>
+</div>
+</div>
+<!-- Breakdown Bento Grid -->
+<div class="bento-grid">
+<!-- Contributed Capital -->
+<div class="modern-card p-card-inner-padding col-span-2">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Capital Contributed</p>
+<h4 class="font-headline-sm text-headline-sm text-primary">₹9,30,000</h4>
+</div>
+<div class="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/30">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Includes initial seed and subsequent equity rounds.</p>
+</div>
+</div>
+<!-- Operational Expenses -->
+<div class="modern-card p-card-inner-padding bg-surface-container-low">
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">OpEx Share</p>
+<h4 class="font-headline-sm text-headline-sm text-error">-₹2,10,000</h4>
+<div class="mt-2 flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="text-[10px] font-semibold uppercase">Deducted</span>
+</div>
+</div>
+<!-- Partner Identification -->
+<div class="modern-card p-card-inner-padding bg-surface-container-low flex flex-col justify-center">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase">Partner ID</p>
+<p class="font-label-md text-label-md">PA-10492</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Settlement Roadmap (Vertical List Item Style) -->
+<div class="modern-card overflow-hidden">
+<div class="p-card-inner-padding border-b border-outline-variant/30 flex justify-between items-center">
+<h4 class="font-label-md text-label-md uppercase text-on-surface-variant">Settlement Timeline</h4>
+<span class="material-symbols-outlined text-primary">history</span>
+</div>
+<div class="p-card-inner-padding space-y-6">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20"></div>
+<div class="w-[2px] h-10 bg-outline-variant mt-1"></div>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Exit Notice Received</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">September 12, 2023</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20"></div>
+<div class="w-[2px] h-10 bg-outline-variant mt-1"></div>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Audit Completed</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">October 05, 2023</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-6 h-6 -ml-[6px] rounded-full bg-white border-2 border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+</div>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Final Settlement Approval</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Awaiting Partner Signature</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Export Actions Section -->
+<div class="space-y-4 pt-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">file_download</span>
+<h4 class="font-label-md text-label-md text-on-surface uppercase">Export Documents</h4>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="h-14 flex items-center justify-center gap-2 rounded-xl bg-surface border border-outline-variant text-primary font-label-md hover:bg-surface-container transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                    Export PDF
+                </button>
+<button class="h-14 flex items-center justify-center gap-2 rounded-xl bg-surface border border-outline-variant text-primary font-label-md hover:bg-surface-container transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">table_view</span>
+                    Export Excel
+                </button>
+</div>
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-label-md flex items-center justify-center gap-2 shadow-lg hover:opacity-90 transition-all active:scale-95">
+                Execute Settlement
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation (from Shared Components) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface shadow-[0_-4px_12px_rgba(6,95,70,0.05)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Expenses</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">store</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</div>
+<!-- Setting Active State to More for this sub-page logic -->
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-90">
+<span class="material-symbols-outlined">more_horiz</span>
+<span class="font-label-md text-label-md">More</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for feedback
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const originalContent = this.innerHTML;
+                if(this.textContent.includes('Export')) {
+                    this.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Generating...`;
+                    setTimeout(() => {
+                        this.innerHTML = `<span class="material-symbols-outlined text-emerald-500">check_circle</span> Ready`;
+                        setTimeout(() => {
+                            this.innerHTML = originalContent;
+                        }, 2000);
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+</body></html>
