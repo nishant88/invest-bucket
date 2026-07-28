@@ -12,8 +12,8 @@ export const ApprovalsInbox: React.FC = () => {
     `[INFO] Awaiting new ledger logs to trigger templates...`
   ]);
 
-  const pendingExpenses = expenses.filter(e => e.approvalStatus === 'Pending');
-  const activePartner = partners.find(p => p.id === activePartnerId);
+  const pendingExpenses = React.useMemo(() => expenses.filter(e => e.approvalStatus === 'Pending'), [expenses]);
+  const activePartner = React.useMemo(() => partners.find(p => p.id === activePartnerId), [partners, activePartnerId]);
 
   const addLog = (msg: string) => {
     setWebhookLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);

@@ -22,29 +22,31 @@ export const Dashboard: React.FC = () => {
   const stats = React.useMemo(() => calculateSummaryStats(partners, expenses, drawings), [partners, expenses, drawings]);
 
   // Format recent activity list from approved logs & drawings
-  const recentActivities = [
-    ...expenses.map(e => ({
-      id: e.id,
-      title: e.vendorName,
-      desc: `${e.category} • via ${e.paymentMode}`,
-      amount: e.amount,
-      type: 'expense' as const,
-      status: e.approvalStatus,
-      timestamp: e.timestamp
-    })),
-    ...drawings.map(d => {
-      const partner = partners.find(p => p.id === d.partnerId);
-      return {
-        id: d.id,
-        title: `Cash Drawing: ${partner?.name || 'Partner'}`,
-        desc: d.reason,
-        amount: d.amount,
-        type: 'drawing' as const,
-        status: 'Approved' as const,
-        timestamp: d.timestamp
-      };
-    })
-  ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()).slice(0, 5);
+  const recentActivities = React.useMemo(() => {
+    return [
+      ...expenses.map(e => ({
+        id: e.id,
+        title: e.vendorName,
+        desc: `${e.category} • via ${e.paymentMode}`,
+        amount: e.amount,
+        type: 'expense' as const,
+        status: e.approvalStatus,
+        timestamp: e.timestamp
+      })),
+      ...drawings.map(d => {
+        const partner = partners.find(p => p.id === d.partnerId);
+        return {
+          id: d.id,
+          title: `Cash Drawing: ${partner?.name || 'Partner'}`,
+          desc: d.reason,
+          amount: d.amount,
+          type: 'drawing' as const,
+          status: 'Approved' as const,
+          timestamp: d.timestamp
+        };
+      })
+    ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()).slice(0, 5);
+  }, [expenses, drawings, partners]);
 
   const totalContribution = stats.totalCapitalContributed;
   const radius = 35;

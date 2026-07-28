@@ -12,17 +12,17 @@ export const DisputeSandbox: React.FC = () => {
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const disputedExpenses = expenses.filter(e => e.approvalStatus === 'Disputed');
-  const selectedExpense = expenses.find(e => e.id === selectedExpenseId);
-  const selectedComments = disputeComments.filter(c => c.expenseId === selectedExpenseId);
-  const activePartner = partners.find(p => p.id === activePartnerId);
+  const disputedExpenses = React.useMemo(() => expenses.filter(e => e.approvalStatus === 'Disputed'), [expenses]);
+  const selectedExpense = React.useMemo(() => expenses.find(e => e.id === selectedExpenseId), [expenses, selectedExpenseId]);
+  const selectedComments = React.useMemo(() => disputeComments.filter(c => c.expenseId === selectedExpenseId), [disputeComments, selectedExpenseId]);
+  const activePartner = React.useMemo(() => partners.find(p => p.id === activePartnerId), [partners, activePartnerId]);
 
   // Auto-scroll chat box to bottom
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
-  }, [selectedComments.length, selectedExpenseId]);
+  }, [selectedComments, selectedExpenseId]);
 
   const handleSendComment = (e: React.FormEvent) => {
     e.preventDefault();

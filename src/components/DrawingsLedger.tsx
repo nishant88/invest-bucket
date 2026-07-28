@@ -10,7 +10,7 @@ export const DrawingsLedger: React.FC = () => {
   const [amount, setAmount] = useState('');
   const [reason, setReason] = useState('');
 
-  const activePartner = partners.find(p => p.id === activePartnerId);
+  const activePartner = React.useMemo(() => partners.find(p => p.id === activePartnerId), [partners, activePartnerId]);
 
   const handleWithdraw = (e: React.FormEvent) => {
     e.preventDefault();
