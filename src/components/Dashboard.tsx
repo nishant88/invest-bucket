@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useBucket } from '../context/BucketContext';
 import { useTranslation } from 'react-i18next';
-import { formatIndianCurrency, calculateSummaryStats } from '../utils/calculations';
+import { formatIndianCurrency, calculateSummaryStats, calculateVentureHealth } from '../utils/calculations';
 
 export const Dashboard: React.FC = () => {
   const { t } = useTranslation();
-  const { partners, expenses, drawings, activePartnerId } = useBucket();
+  const { partners, expenses, drawings, activePartnerId, milestones } = useBucket();
 
   const [activeSegmentIndex, setActiveSegmentIndex] = useState<number | null>(null);
   const [cyclingIndex, setCyclingIndex] = useState(0);
@@ -20,6 +20,10 @@ export const Dashboard: React.FC = () => {
   }, [activeSegmentIndex, partners.length]);
 
   const stats = React.useMemo(() => calculateSummaryStats(partners, expenses, drawings), [partners, expenses, drawings]);
+
+  const healthData = React.useMemo(() => {
+    return calculateVentureHealth(partners, expenses, drawings, milestones);
+  }, [partners, expenses, drawings, milestones]);
 
   // Format recent activity list from approved logs & drawings
   const recentActivities = React.useMemo(() => {
@@ -124,6 +128,37 @@ export const Dashboard: React.FC = () => {
           <span className="material-symbols-outlined text-[22px]" style={{ fontVariationSettings: "'FILL' 0" }}>notifications</span>
           <span className="w-2.5 h-2.5 bg-red-500 rounded-full absolute top-2.5 right-2.5 border-2 border-white" />
         </button>
+      </div>
+
+      {/* Contextual Venture Health Mini Card */}
+      <div 
+        onClick={() => {
+          // Trigger the 'health' subscreen navigation by finding and clicking the header pill
+          const healthPill = document.querySelector('[title="View Account"]')?.parentElement?.firstChild as HTMLButtonElement;
+          if (healthPill) healthPill.click();
+        }}
+        className="bg-white rounded-[24px] p-4 border border-outline-variant/30 flex items-center justify-between text-left cursor-pointer active:scale-[0.99] transition-all hover:bg-slate-50 relative overflow-hidden card-shadow"
+      >
+        <div className="flex items-center gap-3">
+          <span className="material-symbols-outlined text-primary text-[22px]">analytics</span>
+          <div>
+            <h4 className="font-display font-extrabold text-[12.5px] text-[#0d1c32]">Venture Health Index</h4>
+            <p className="text-[10px] text-slate-500 font-semibold mt-0.5">Success probability currently sits at {healthData.successProbability}%</p>
+          </div>
+        </div>
+        
+        <div className="flex items-center gap-1">
+          <span className={`text-[9.5px] font-black px-2 py-0.5 rounded-full border ${
+            healthData.status === 'Green' 
+              ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
+              : healthData.status === 'Amber'
+              ? 'bg-amber-50 text-amber-600 border-amber-100'
+              : 'bg-rose-50 text-rose-600 border-rose-100'
+          }`}>
+            {healthData.score}/100
+          </span>
+          <span className="material-symbols-outlined text-[16px] text-slate-400">chevron_right</span>
+        </div>
       </div>
 
       {/* Live Equity splits donut */}

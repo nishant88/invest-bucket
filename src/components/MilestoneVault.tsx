@@ -54,11 +54,18 @@ export const MilestoneVault: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <h3 className="font-bold text-body-sm text-on-surface">{m.name}</h3>
                     
-                    <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
-                      m.isLocked ? 'bg-[#ffdad6] text-[#ba1a1a]' : 'bg-primary/10 text-primary'
-                    }`}>
-                      {m.isLocked ? t('milestones.locked') : t('milestones.unlocked')}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      {totalSum > m.targetBudget && (
+                        <span className="text-[8px] font-black bg-rose-50 text-rose-600 border border-rose-100 px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
+                          Budget Overrun!
+                        </span>
+                      )}
+                      <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                        m.isLocked ? 'bg-[#ffdad6] text-[#ba1a1a]' : 'bg-primary/10 text-primary'
+                      }`}>
+                        {m.isLocked ? t('milestones.locked') : t('milestones.unlocked')}
+                      </span>
+                    </div>
                   </div>
                   <p className="text-[11px] text-on-surface-variant mt-1">
                     Phase {m.phaseOrder} • {linkedExpenses.length} approved expenses
@@ -70,7 +77,9 @@ export const MilestoneVault: React.FC = () => {
               <div className="flex justify-between items-center">
                 <div>
                   <p className="text-[9px] font-bold text-on-surface-variant uppercase tracking-wider">Spent Balance</p>
-                  <p className="font-bold text-body-sm text-primary mt-1">{formatIndianCurrency(totalSum)}</p>
+                  <p className={`font-bold text-body-sm mt-1 ${totalSum > m.targetBudget ? 'text-rose-600 animate-pulse' : 'text-primary'}`}>
+                    {formatIndianCurrency(totalSum)} <span className="text-[9px] font-medium text-slate-500">/ {formatIndianCurrency(m.targetBudget)}</span>
+                  </p>
                 </div>
 
                 <button

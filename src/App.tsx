@@ -15,13 +15,15 @@ import { Settings } from './components/Settings';
 import { DesignSpecs } from './components/DesignSpecs';
 import { Auth } from './components/Auth';
 import { TeamManagement } from './components/TeamManagement';
+import { VentureHealth } from './components/VentureHealth';
+import { calculateVentureHealth } from './utils/calculations';
 
 const AppContent: React.FC = () => {
   const { t } = useTranslation();
-  const { isConfigured, bizName, isLoading, userSession, logoutUser } = useBucket();
+  const { isConfigured, bizName, isLoading, userSession, logoutUser, partners, expenses, drawings, milestones } = useBucket();
 
   const [activeTab, setActiveTab] = useState<'dashboard' | 'expenses' | 'approvals' | 'more'>('dashboard');
-  const [moreSubScreen, setMoreSubScreen] = useState<'menu' | 'disputes' | 'drawings' | 'vendors' | 'milestones' | 'mou' | 'reports' | 'settings' | 'designspecs' | 'team'>('menu');
+  const [moreSubScreen, setMoreSubScreen] = useState<'menu' | 'disputes' | 'drawings' | 'vendors' | 'milestones' | 'mou' | 'reports' | 'settings' | 'designspecs' | 'team' | 'health'>('menu');
   const [partnerDropdownOpen, setPartnerDropdownOpen] = useState(false);
 
   if (isLoading) {
@@ -36,6 +38,10 @@ const AppContent: React.FC = () => {
   if (!userSession) {
     return <Auth />;
   }
+
+  const healthData = React.useMemo(() => {
+    return calculateVentureHealth(partners, expenses, drawings, milestones);
+  }, [partners, expenses, drawings, milestones]);
 
   // Render onboarding card if not configured
   if (!isConfigured) {
@@ -68,6 +74,7 @@ const AppContent: React.FC = () => {
       if (moreSubScreen === 'settings') return t('settings.title');
       if (moreSubScreen === 'designspecs') return 'Design Specifications';
       if (moreSubScreen === 'team') return 'Manage Team';
+      if (moreSubScreen === 'health') return 'Venture Health Intelligence';
     }
     return bizName;
   };
@@ -92,6 +99,7 @@ const AppContent: React.FC = () => {
       if (moreSubScreen === 'settings') return <Settings />;
       if (moreSubScreen === 'designspecs') return <DesignSpecs />;
       if (moreSubScreen === 'team') return <TeamManagement />;
+      if (moreSubScreen === 'health') return <VentureHealth />;
     }
     return <Dashboard />;
   };
@@ -171,6 +179,15 @@ const AppContent: React.FC = () => {
       </button>
 
       <button
+        onClick={() => handleMoreNavigation('health')}
+        className="h-[135px] bg-white hover:bg-surface-container-low border border-outline-variant/30 rounded-[24px] p-4 flex flex-col items-center justify-center text-center transition-all hover-scale shadow-sm overflow-visible"
+      >
+        <span className="material-symbols-outlined text-[38px] text-primary">analytics</span>
+        <h4 className="font-bold text-[13px] text-primary tracking-wide leading-tight uppercase mt-1.5">Venture Health</h4>
+        <p className="text-[10px] text-on-surface-variant font-medium leading-tight mt-1 max-w-[90%] truncate w-full">Predictive success AI</p>
+      </button>
+
+      <button
         onClick={() => handleMoreNavigation('designspecs')}
         className="h-[135px] bg-white hover:bg-surface-container-low border border-outline-variant/30 rounded-[24px] p-4 flex flex-col items-center justify-center text-center transition-all hover-scale shadow-sm overflow-visible"
       >
@@ -221,6 +238,27 @@ const AppContent: React.FC = () => {
 
         {/* Right side items: Bell Notification and Active Partner Avatar */}
         <div className="flex items-center gap-3">
+          {/* Venture Health Status Pill */}
+          <button
+            onClick={() => handleMoreNavigation('health')}
+            className={`flex items-center gap-1.5 text-[9px] font-black px-2.5 py-1 rounded-full border shadow-sm active:scale-95 transition-all select-none ${
+              healthData.status === 'Green' 
+                ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
+                : healthData.status === 'Amber'
+                ? 'bg-amber-50 text-amber-600 border-amber-100'
+                : 'bg-rose-50 text-rose-600 border-rose-100'
+            }`}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${
+              healthData.status === 'Green' 
+                ? 'bg-emerald-500'
+                : healthData.status === 'Amber'
+                ? 'bg-amber-500'
+                : 'bg-rose-500'
+            } animate-pulse`} />
+            {healthData.status === 'Green' ? 'HEALTHY' : healthData.status === 'Amber' ? 'ATTENTION' : 'CRITICAL'}
+          </button>
+
           <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-1.5 rounded-full hover:bg-slate-100">
             <span className="material-symbols-outlined text-[22px]" style={{ fontVariationSettings: "'FILL' 0" }}>notifications</span>
           </button>

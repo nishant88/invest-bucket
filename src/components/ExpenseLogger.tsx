@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useBucket } from '../context/BucketContext';
 import { useTranslation } from 'react-i18next';
-import { calculateSummaryStats, formatIndianCurrency } from '../utils/calculations';
+import { calculateSummaryStats, formatIndianCurrency, calculateVentureHealth } from '../utils/calculations';
 import Tesseract from 'tesseract.js';
 
 export const ExpenseLogger: React.FC = () => {
   const { t } = useTranslation();
   const { partners, expenses, drawings, milestones, addExpense } = useBucket();
+
+  const healthData = React.useMemo(() => {
+    return calculateVentureHealth(partners, expenses, drawings, milestones);
+  }, [partners, expenses, drawings, milestones]);
 
   const [amount, setAmount] = useState('');
   const [vendorName, setVendorName] = useState('');
@@ -197,6 +201,25 @@ export const ExpenseLogger: React.FC = () => {
         <h2 className="font-display-lg text-display-lg text-primary mb-2">{t('expense.title')}</h2>
         <p className="font-body-md text-on-surface-variant">Verify co-founder spendings by scanning bill receipts.</p>
       </section>
+
+      {/* Dynamic Health Warning Alert */}
+      {healthData.status !== 'Green' && (
+        <div className={`p-4 rounded-2xl border flex items-start gap-2.5 text-left animate-fade-in ${
+          healthData.status === 'Amber' 
+            ? 'bg-amber-50 border-amber-100 text-amber-800' 
+            : 'bg-rose-50 border-rose-100 text-rose-800'
+        }`}>
+          <span className="material-symbols-outlined text-[20px] shrink-0 mt-0.5">
+            {healthData.status === 'Amber' ? 'warning' : 'dangerous'}
+          </span>
+          <div>
+            <h4 className="text-[11.5px] font-black uppercase tracking-wide">Venture Control Warning</h4>
+            <p className="text-[10px] font-semibold leading-normal mt-0.5">
+              The project health status is currently <strong className="font-extrabold">{healthData.statusLabel}</strong> ({healthData.score}/100). Please resolve any disputed entries or pending approvals before logging further overhead expenses.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* OCR Viewfinder Box */}
       <section className="bg-white rounded-[20px] p-card-inner-padding card-shadow border border-outline-variant/40 space-y-4">
