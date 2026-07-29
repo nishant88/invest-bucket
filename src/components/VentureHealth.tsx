@@ -311,7 +311,7 @@ export const VentureHealth: React.FC = () => {
           {/* Card 4: Roadmap Goals */}
           <div className="p-4 bg-surface rounded-2xl border border-outline-variant/15 space-y-2 flex flex-col justify-between min-h-28">
             <div className="flex items-center gap-1.5 text-primary">
-              <span className="material-symbols-outlined text-[18px]">crisis_line</span>
+              <span className="material-symbols-outlined text-[18px]">track_changes</span>
               <h5 className="font-display font-extrabold text-[12px] uppercase tracking-wide">Roadmap Goals</h5>
             </div>
             <ul className="list-disc pl-5 text-[11px] font-medium text-slate-600 space-y-1 leading-normal flex-1">
