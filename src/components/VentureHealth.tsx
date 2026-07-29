@@ -125,37 +125,63 @@ export const VentureHealth: React.FC = () => {
         </div>
 
         {/* Card 2: Risk Severity Table */}
-        <div className="bg-white rounded-[24px] p-6 card-shadow border border-outline-variant/30 w-full h-56 flex flex-col justify-between">
+        <div className="bg-white rounded-[24px] p-6 card-shadow border border-outline-variant/30 w-full h-fit flex flex-col justify-between">
           <h4 className="font-display font-bold text-[11px] text-slate-500 uppercase tracking-wider block">Risk Severity Table</h4>
           
-          <div className="grid grid-cols-2 gap-3 mt-3 flex-1">
-            <div className="p-3.5 rounded-2xl border border-outline-variant/20 flex flex-col justify-between bg-slate-50/60 h-20">
-              <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider leading-none">Financial Splits</span>
-              <span className="text-[11px] font-extrabold text-[#0d1c32] uppercase mt-2">Low Variance</span>
-            </div>
-
-            <div className="p-3.5 rounded-2xl border border-outline-variant/20 flex flex-col justify-between bg-slate-50/60 h-20">
-              <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider leading-none">Dispute Count</span>
-              <span className={`text-[9.5px] font-black px-2.5 py-0.5 rounded-md inline-block w-fit uppercase mt-2 ${
-                healthData.disputesCount === 0 ? 'text-emerald-700 bg-emerald-50' : 'text-rose-700 bg-rose-50'
-              }`}>
-                {healthData.disputesCount === 0 ? 'None' : `${healthData.disputesCount} Active`}
+          <div className="grid grid-cols-2 gap-3 mt-4 flex-1">
+            {/* Box 1: Financial Splits */}
+            <div className="p-4 rounded-2xl border border-outline-variant/15 flex flex-col justify-between bg-slate-50/50 h-[92px]">
+              <div>
+                <span className="text-[9px] text-slate-400 font-black uppercase tracking-wider block">Financial Splits</span>
+                <span className="text-[12px] font-extrabold text-[#0d1c32] block mt-1">Low Variance</span>
+              </div>
+              <span className="text-[8px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-md px-1.5 py-0.5 w-fit mt-1.5">
+                LOW RISK
               </span>
             </div>
 
-            <div className="p-3.5 rounded-2xl border border-outline-variant/20 flex flex-col justify-between bg-slate-50/60 h-20">
-              <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider leading-none">Budget Overruns</span>
-              <span className={`text-[9.5px] font-black px-2.5 py-0.5 rounded-md inline-block w-fit uppercase mt-2 ${
-                healthData.overbudgetMilestonesCount === 0 ? 'text-emerald-700 bg-emerald-50' : 'text-amber-700 bg-amber-50'
+            {/* Box 2: Dispute Count */}
+            <div className="p-4 rounded-2xl border border-outline-variant/15 flex flex-col justify-between bg-slate-50/50 h-[92px]">
+              <div>
+                <span className="text-[9px] text-slate-400 font-black uppercase tracking-wider block">Dispute Count</span>
+                <span className="text-[12px] font-extrabold text-[#0d1c32] block mt-1">
+                  {healthData.disputesCount === 0 ? 'No Disputes' : `${healthData.disputesCount} Active`}
+                </span>
+              </div>
+              <span className={`text-[8px] font-black rounded-md px-1.5 py-0.5 w-fit mt-1.5 border ${
+                healthData.disputesCount === 0 ? 'text-emerald-600 bg-emerald-50 border-emerald-100' : 'text-rose-600 bg-rose-50 border-rose-100 animate-pulse'
               }`}>
-                {healthData.overbudgetMilestonesCount === 0 ? 'Low Risk' : `${healthData.overbudgetMilestonesCount} Overrun`}
+                {healthData.disputesCount === 0 ? 'NONE' : 'HIGH RISK'}
               </span>
             </div>
 
-            <div className="p-3.5 rounded-2xl border border-outline-variant/20 flex flex-col justify-between bg-slate-50/60 h-20">
-              <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider leading-none">Phase Locks</span>
-              <span className="text-[11px] font-black text-[#0d1c32] uppercase mt-2">
-                {healthData.completedMilestonesCount} / {healthData.totalMilestonesCount} Locked
+            {/* Box 3: Budget Overruns */}
+            <div className="p-4 rounded-2xl border border-outline-variant/15 flex flex-col justify-between bg-slate-50/50 h-[92px]">
+              <div>
+                <span className="text-[9px] text-slate-400 font-black uppercase tracking-wider block">Budget Overruns</span>
+                <span className="text-[12px] font-extrabold text-[#0d1c32] block mt-1">
+                  {healthData.overbudgetMilestonesCount === 0 ? 'On Budget' : `${healthData.overbudgetMilestonesCount} Overrun`}
+                </span>
+              </div>
+              <span className={`text-[8px] font-black rounded-md px-1.5 py-0.5 w-fit mt-1.5 border ${
+                healthData.overbudgetMilestonesCount === 0 ? 'text-emerald-600 bg-emerald-50 border-emerald-100' : 'text-amber-600 bg-amber-50 border-amber-100'
+              }`}>
+                {healthData.overbudgetMilestonesCount === 0 ? 'LOW RISK' : 'MEDIUM RISK'}
+              </span>
+            </div>
+
+            {/* Box 4: Phase Locks */}
+            <div className="p-4 rounded-2xl border border-outline-variant/15 flex flex-col justify-between bg-slate-50/50 h-[92px]">
+              <div>
+                <span className="text-[9px] text-slate-400 font-black uppercase tracking-wider block">Phase Locks</span>
+                <span className="text-[12px] font-extrabold text-[#0d1c32] block mt-1">
+                  {healthData.completedMilestonesCount} / {healthData.totalMilestonesCount} Locked
+                </span>
+              </div>
+              <span className={`text-[8px] font-black rounded-md px-1.5 py-0.5 w-fit mt-1.5 border ${
+                healthData.completedMilestonesCount === healthData.totalMilestonesCount ? 'text-emerald-600 bg-emerald-50 border-emerald-100' : 'text-amber-600 bg-amber-50 border-amber-100'
+              }`}>
+                {healthData.completedMilestonesCount === healthData.totalMilestonesCount ? 'COMPLETED' : 'IN PROGRESS'}
               </span>
             </div>
           </div>
