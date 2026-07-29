@@ -20,8 +20,8 @@ export const VentureHealth: React.FC = () => {
 
   const statusColors = getStatusColor(healthData.status);
 
-  // SVG Gauge needle calculations
-  const gaugeAngle = (healthData.score / 100) * 180 - 180; // range from -180 to 0 degrees
+  // SVG Gauge calculations
+  const gaugeAngle = (healthData.score / 100) * 180 - 180;
 
   // Copy Stakeholder Summary to clipboard
   const handleCopySummary = () => {
@@ -30,289 +30,273 @@ export const VentureHealth: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4 text-left pb-12 animate-fade-in text-[#0d1c32]">
+    <div className="space-y-4 text-left pb-16 animate-fade-in text-[#0d1c32] select-none">
       
-      {/* 1. Header Overview Cards */}
-      <section className="grid grid-cols-1 gap-3.5">
-        {/* Main Score Glassmorphic Card */}
-        <div className="bg-white/70 backdrop-blur-[20px] rounded-[24px] p-4.5 border border-white/40 card-shadow relative overflow-hidden flex flex-col justify-between">
-          <div className="absolute right-0 top-0 w-24 h-24 bg-[#fae403]/10 rounded-full blur-2xl pointer-events-none" />
-          
+      {/* SECTION 1: Core Health Indicators Grid */}
+      <section className="grid grid-cols-2 gap-3">
+        {/* Card 1: Venture Health Score */}
+        <div className="bg-white rounded-[24px] p-4 card-shadow border border-outline-variant/40 flex flex-col justify-between relative overflow-hidden h-[155px]">
+          <div className="absolute right-0 top-0 w-20 h-20 bg-[#fae403]/10 rounded-full blur-xl pointer-events-none" />
           <div>
-            <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block">Venture Analytics</span>
-            <h3 className="font-display font-extrabold text-[14px] text-[#0d1c32] tracking-tight mt-0.5">Core Health Score</h3>
-            
-            <div className="flex items-baseline gap-0.5 mt-3">
-              <span className="text-[38px] font-black text-[#0d1c32] tracking-tight leading-none">
-                {healthData.score}
-              </span>
-              <span className="text-[12px] font-bold text-slate-400">/ 100</span>
+            <span className="text-[8.5px] font-bold text-slate-400 uppercase tracking-wider block">Health Score</span>
+            <div className="flex items-baseline gap-0.5 mt-2.5">
+              <span className="text-[34px] font-black text-[#0d1c32] tracking-tight leading-none">{healthData.score}</span>
+              <span className="text-[11px] font-bold text-slate-400">/100</span>
             </div>
-
-            {/* Health pill */}
-            <div className="flex items-center gap-2 mt-3.5">
-              <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[8.5px] font-black border ${statusColors.bg} ${statusColors.text} ${statusColors.border}`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${statusColors.dot} animate-pulse`} />
-                {healthData.statusLabel.toUpperCase()}
-              </span>
-              <span className="text-[9.5px] text-slate-500 font-semibold">
-                Confidence: <strong className="text-[#0d1c32]">{healthData.confidence}</strong>
-              </span>
-            </div>
+          </div>
+          <div>
+            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[8px] font-black border ${statusColors.bg} ${statusColors.text} ${statusColors.border}`}>
+              <span className={`w-1 h-1 rounded-full ${statusColors.dot} animate-pulse`} />
+              {healthData.statusLabel.toUpperCase()}
+            </span>
           </div>
         </div>
 
-        {/* Prediction probability card */}
-        <div className="bg-[#0d1c32] text-white rounded-[24px] p-4.5 card-shadow flex items-center gap-4 relative overflow-hidden">
-          <div className="absolute right-0 top-0 w-24 h-24 bg-[#fae403]/10 rounded-full blur-2xl pointer-events-none" />
+        {/* Card 2: Success Probability Dial */}
+        <div className="bg-[#0d1c32] text-white rounded-[24px] p-4 card-shadow border border-white/5 flex flex-col justify-between relative overflow-hidden h-[155px]">
+          <div className="absolute right-0 top-0 w-20 h-20 bg-[#fae403]/10 rounded-full blur-xl pointer-events-none" />
           
-          {/* Compact SVG Dial Chart */}
-          <div className="relative w-16 h-16 shrink-0 flex items-center justify-center">
-            <svg className="w-full h-full transform -rotate-90">
-              <circle cx="32" cy="32" r="26" stroke="rgba(255,255,255,0.06)" strokeWidth="5.5" fill="transparent" />
-              <circle 
-                cx="32" 
-                cy="32" 
-                r="26" 
-                stroke="#fae403" 
-                strokeWidth="5.5" 
-                fill="transparent"
-                strokeDasharray={2 * Math.PI * 26}
-                strokeDashoffset={2 * Math.PI * 26 * (1 - healthData.successProbability / 100)}
-                strokeLinecap="round"
-                className="transition-all duration-1000"
-              />
-            </svg>
-            <div className="absolute text-center select-none">
-              <span className="text-[12.5px] font-black text-white leading-none">{healthData.successProbability}%</span>
-              <span className="block text-[7px] text-white/60 font-bold uppercase tracking-wider mt-0.5">Success</span>
+          <div className="flex justify-between items-start">
+            <div>
+              <span className="text-[8.5px] font-bold text-white/50 uppercase tracking-wider block">Probability</span>
+              <span className="text-[20px] font-black text-[#fae403] tracking-tight block mt-1">{healthData.successProbability}%</span>
+            </div>
+            
+            {/* SVG Progress Ring */}
+            <div className="relative w-12 h-12 shrink-0 flex items-center justify-center">
+              <svg className="w-full h-full transform -rotate-90">
+                <circle cx="24" cy="24" r="19" stroke="rgba(255,255,255,0.06)" strokeWidth="4.5" fill="transparent" />
+                <circle 
+                  cx="24" 
+                  cy="24" 
+                  r="19" 
+                  stroke="#fae403" 
+                  strokeWidth="4.5" 
+                  fill="transparent"
+                  strokeDasharray={2 * Math.PI * 19}
+                  strokeDashoffset={2 * Math.PI * 19 * (1 - healthData.successProbability / 100)}
+                  strokeLinecap="round"
+                />
+              </svg>
             </div>
           </div>
 
-          <div className="space-y-1.5 text-left flex-1 min-w-0">
-            <h4 className="text-[12px] font-extrabold text-[#fae403] uppercase tracking-wide">Success Probability</h4>
-            <p className="text-[10px] text-white/80 leading-snug">
-              Estimated success outlook currently stands at <strong className="text-white">{healthData.successProbability}%</strong> based on ledger progress.
-            </p>
-            <div className="text-[9px] text-[#b2ee4a] font-bold flex items-center gap-1">
-              <span className="material-symbols-outlined text-[13px]">schedule</span>
-              Est. Completion: {healthData.predictions.estCompletionDays} Days
-            </div>
+          <div className="text-[8.5px] text-white/80 leading-normal font-semibold">
+            Forecasted milestone success timeline: {healthData.predictions.estCompletionDays} Days.
           </div>
         </div>
       </section>
 
-      {/* 2. Visualizations Panel */}
-      <section className="grid grid-cols-1 gap-3.5">
-        {/* SVG Health Gauge dial */}
-        <div className="bg-white rounded-[24px] p-4.5 card-shadow border border-outline-variant/30 space-y-3.5">
-          <h4 className="font-display font-bold text-[11px] text-slate-500 uppercase tracking-wider">Health dial Indicator</h4>
+      {/* SECTION 2: Analytics Gauges Grid */}
+      <section className="grid grid-cols-2 gap-3">
+        {/* Card 1: Health Dial Gauge */}
+        <div className="bg-white rounded-[24px] p-4 card-shadow border border-outline-variant/40 flex flex-col justify-between h-[175px]">
+          <h4 className="font-display font-bold text-[9px] text-slate-500 uppercase tracking-wider block">Dial Indicator</h4>
           
-          <div className="relative flex flex-col items-center py-2">
-            <div className="relative w-36 h-18 overflow-hidden flex items-end">
-              {/* Semicircle track */}
-              <svg className="w-36 h-36 absolute bottom-0 left-0">
-                <circle cx="72" cy="72" r="62" stroke="#f1f5f9" strokeWidth="12" strokeDasharray="195 195" strokeDashoffset="0" fill="transparent" strokeLinecap="round" />
-                <circle cx="72" cy="72" r="62" stroke={healthData.status === 'Green' ? '#10b981' : healthData.status === 'Amber' ? '#f59e0b' : '#f43f5e'} strokeWidth="12" strokeDasharray="195 195" strokeDashoffset={195 - (195 * (healthData.score / 100))} fill="transparent" strokeLinecap="round" />
+          <div className="relative flex flex-col items-center justify-center flex-1">
+            <div className="relative w-28 h-14 overflow-hidden flex items-end">
+              <svg className="w-28 h-28 absolute bottom-0 left-0">
+                <circle cx="56" cy="56" r="48" stroke="#f1f5f9" strokeWidth="10" strokeDasharray="151 151" strokeDashoffset="0" fill="transparent" strokeLinecap="round" />
+                <circle cx="56" cy="56" r="48" stroke={healthData.status === 'Green' ? '#10b981' : healthData.status === 'Amber' ? '#f59e0b' : '#f43f5e'} strokeWidth="10" strokeDasharray="151 151" strokeDashoffset={151 - (151 * (healthData.score / 100))} fill="transparent" strokeLinecap="round" />
               </svg>
-
-              {/* Semicircle needle */}
               <div 
-                className="absolute bottom-0 left-1/2 w-1.5 h-14 bg-[#0d1c32] origin-bottom -translate-x-1/2 transition-all duration-1000 rounded-t-full"
+                className="absolute bottom-0 left-1/2 w-1.5 h-11 bg-[#0d1c32] origin-bottom -translate-x-1/2 transition-all duration-1000 rounded-t-full"
                 style={{ transform: `translateX(-50%) rotate(${gaugeAngle}deg)` }}
               />
-              {/* Need pin */}
-              <div className="absolute bottom-0 left-1/2 w-4.5 h-4.5 bg-[#0d1c32] rounded-full border-4 border-white -translate-x-1/2 translate-y-2 z-10" />
+              <div className="absolute bottom-0 left-1/2 w-3.5 h-3.5 bg-[#0d1c32] rounded-full border-2 border-white -translate-x-1/2 translate-y-1.5 z-10" />
             </div>
+          </div>
 
-            <div className="text-center mt-3.5">
-              <span className="text-[20px] font-black text-[#0d1c32]">{healthData.score}</span>
-              <span className="text-[10px] font-bold text-slate-500 block mt-0.5">Core Success Score</span>
-            </div>
+          <div className="text-center">
+            <span className="text-[9.5px] font-bold text-slate-500 block leading-tight">Overall Progress Stability</span>
           </div>
         </div>
 
-        {/* Risk Indicators List (Replaces squeezed grid Heat Map) */}
-        <div className="bg-white rounded-[24px] p-4.5 card-shadow border border-outline-variant/30 space-y-3.5">
-          <h4 className="font-display font-bold text-[11px] text-slate-500 uppercase tracking-wider">Risk Roster Summary</h4>
+        {/* Card 2: Risk Heat Map (Subgrid of 4 cards) */}
+        <div className="bg-white rounded-[24px] p-4 card-shadow border border-outline-variant/40 flex flex-col justify-between h-[175px]">
+          <h4 className="font-display font-bold text-[9px] text-slate-500 uppercase tracking-wider block">Risk Severity Heat Map</h4>
           
-          <div className="space-y-2">
-            <div className="flex justify-between items-center p-2.5 bg-slate-50/60 rounded-xl border border-outline-variant/15 text-[10.5px]">
-              <span className="font-bold text-slate-500 uppercase tracking-wider text-[9px]">Financial Splits</span>
-              <span className="text-[#0d1c32] font-black">Low Split Variance</span>
+          <div className="grid grid-cols-2 gap-2 flex-1 mt-2.5">
+            <div className="p-1.5 rounded-xl border border-outline-variant/20 flex flex-col justify-between bg-slate-50/50">
+              <span className="text-[7.5px] text-slate-500 font-bold uppercase tracking-wider leading-none">Splits</span>
+              <span className="text-[8.5px] font-black text-emerald-600 truncate leading-none uppercase mt-1">Low Risk</span>
             </div>
 
-            <div className="flex justify-between items-center p-2.5 bg-slate-50/60 rounded-xl border border-outline-variant/15 text-[10.5px]">
-              <span className="font-bold text-slate-500 uppercase tracking-wider text-[9px]">Disputes Count</span>
-              <span className={`font-black px-2 py-0.5 rounded-md ${
-                healthData.disputesCount === 0 ? 'text-emerald-700 bg-emerald-50 border border-emerald-100' : 'text-rose-700 bg-rose-50 border border-rose-100'
+            <div className="p-1.5 rounded-xl border border-outline-variant/20 flex flex-col justify-between bg-slate-50/50">
+              <span className="text-[7.5px] text-slate-500 font-bold uppercase tracking-wider leading-none">Disputes</span>
+              <span className={`text-[8.5px] font-black truncate leading-none uppercase mt-1 ${
+                healthData.disputesCount === 0 ? 'text-emerald-600' : 'text-rose-600'
               }`}>
-                {healthData.disputesCount} Active
+                {healthData.disputesCount === 0 ? 'None' : `${healthData.disputesCount} Act.`}
               </span>
             </div>
 
-            <div className="flex justify-between items-center p-2.5 bg-slate-50/60 rounded-xl border border-outline-variant/15 text-[10.5px]">
-              <span className="font-bold text-slate-500 uppercase tracking-wider text-[9px]">Milestone Overruns</span>
-              <span className={`font-black px-2 py-0.5 rounded-md ${
-                healthData.overbudgetMilestonesCount === 0 ? 'text-emerald-700 bg-emerald-50 border border-emerald-100' : 'text-amber-700 bg-amber-50 border border-amber-100'
+            <div className="p-1.5 rounded-xl border border-outline-variant/20 flex flex-col justify-between bg-slate-50/50">
+              <span className="text-[7.5px] text-slate-500 font-bold uppercase tracking-wider leading-none">Overruns</span>
+              <span className={`text-[8.5px] font-black truncate leading-none uppercase mt-1 ${
+                healthData.overbudgetMilestonesCount === 0 ? 'text-emerald-600' : 'text-amber-600'
               }`}>
-                {healthData.overbudgetMilestonesCount} Overrun
+                {healthData.overbudgetMilestonesCount === 0 ? 'Low' : `${healthData.overbudgetMilestonesCount} Ov.`}
               </span>
             </div>
 
-            <div className="flex justify-between items-center p-2.5 bg-slate-50/60 rounded-xl border border-outline-variant/15 text-[10.5px]">
-              <span className="font-bold text-slate-500 uppercase tracking-wider text-[9px]">Phase Budget Locks</span>
-              <span className="text-[#0d1c32] font-black">
-                {healthData.completedMilestonesCount} / {healthData.totalMilestonesCount} Phases
+            <div className="p-1.5 rounded-xl border border-outline-variant/20 flex flex-col justify-between bg-slate-50/50">
+              <span className="text-[7.5px] text-slate-500 font-bold uppercase tracking-wider leading-none">Locks</span>
+              <span className="text-[8.5px] font-black text-[#0d1c32] truncate leading-none uppercase mt-1">
+                {healthData.completedMilestonesCount}/{healthData.totalMilestonesCount}
               </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. AI Insights Card (Responsive height auto-grow) */}
-      <section className="bg-[#ecf3e3] rounded-[24px] p-4.5 border border-outline-variant/30 text-[#0d1c32] relative overflow-hidden flex flex-col justify-between">
-        <div className="absolute right-3 top-3 select-none">
-          <span className="material-symbols-outlined text-[#0d1c32]/10 text-[48px] pointer-events-none">insights</span>
-        </div>
-
-        <div className="relative z-10 space-y-2">
-          <div className="flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[15px] text-emerald-800">stars</span>
-            <span className="text-[8.5px] font-black uppercase tracking-widest text-emerald-800">AI Analytics Insights</span>
+      {/* SECTION 3: AI Executive Center Grid */}
+      <section className="grid grid-cols-2 gap-3">
+        {/* Card 1: AI Insight Card */}
+        <div className="bg-[#ecf3e3] rounded-[24px] p-4 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden h-[180px]">
+          <div className="absolute right-2 top-2 select-none pointer-events-none opacity-20">
+            <span className="material-symbols-outlined text-[#0d1c32] text-[40px]">insights</span>
           </div>
 
-          <p className="text-[11px] font-bold leading-normal pr-8 min-h-[36px] flex items-center">
-            {healthData.insights[activeInsightIndex]}
-          </p>
+          <div className="space-y-1 relative z-10">
+            <div className="flex items-center gap-1 text-emerald-800">
+              <span className="material-symbols-outlined text-[14px]">stars</span>
+              <span className="text-[8px] font-black uppercase tracking-wider">AI Insights</span>
+            </div>
+            <p className="text-[10px] font-semibold leading-normal text-[#0d1c32]/80 mt-1 min-h-[72px] flex items-center pr-3">
+              {healthData.insights[activeInsightIndex]}
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-[#0d1c32]/10 pt-2 relative z-10">
+            <span className="text-[8px] font-bold text-[#0d1c32]/50">
+              {activeInsightIndex + 1}/{healthData.insights.length}
+            </span>
+            <div className="flex gap-1">
+              <button 
+                onClick={() => setActiveInsightIndex(prev => (prev - 1 + healthData.insights.length) % healthData.insights.length)}
+                className="w-5.5 h-5.5 bg-white rounded-full flex items-center justify-center border border-black/5 active:scale-90 transition-all"
+              >
+                <span className="material-symbols-outlined text-[12px]">chevron_left</span>
+              </button>
+              <button 
+                onClick={() => setActiveInsightIndex(prev => (prev + 1) % healthData.insights.length)}
+                className="w-5.5 h-5.5 bg-white rounded-full flex items-center justify-center border border-black/5 active:scale-90 transition-all"
+              >
+                <span className="material-symbols-outlined text-[12px]">chevron_right</span>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between pt-3 border-t border-[#0d1c32]/10 mt-3 relative z-10">
-          <span className="text-[8.5px] font-bold text-[#0d1c32]/60">
-            Card {activeInsightIndex + 1} of {healthData.insights.length}
-          </span>
-          <div className="flex gap-1.5">
+        {/* Card 2: Stakeholder Summary */}
+        <div className="bg-white rounded-[24px] p-4 card-shadow border border-outline-variant/40 flex flex-col justify-between h-[180px]">
+          <div className="flex justify-between items-center">
+            <span className="text-[8.5px] font-bold text-slate-500 uppercase tracking-wider block">Stakeholder briefing</span>
             <button 
-              onClick={() => setActiveInsightIndex(prev => (prev - 1 + healthData.insights.length) % healthData.insights.length)}
-              className="w-6.5 h-6.5 bg-white rounded-full flex items-center justify-center border border-black/10 active:scale-90 transition-all"
+              onClick={handleCopySummary}
+              className="flex items-center gap-0.5 bg-surface border border-outline-variant/20 rounded-md px-1.5 py-0.5 text-[8.5px] font-black text-[#0d1c32] hover:bg-slate-50 active:scale-95 transition-all"
             >
-              <span className="material-symbols-outlined text-[14px]">chevron_left</span>
-            </button>
-            <button 
-              onClick={() => setActiveInsightIndex(prev => (prev + 1) % healthData.insights.length)}
-              className="w-6.5 h-6.5 bg-white rounded-full flex items-center justify-center border border-black/10 active:scale-90 transition-all"
-            >
-              <span className="material-symbols-outlined text-[14px]">chevron_right</span>
+              <span className="material-symbols-outlined text-[11px]">content_copy</span>
+              Copy
             </button>
           </div>
+
+          <blockquote className="bg-slate-50 rounded-xl p-2.5 text-[9.5px] font-semibold text-slate-500 border-l-2 border-[#0d1c32] leading-relaxed italic text-left flex-1 mt-2 overflow-y-auto max-h-[110px]">
+            "{healthData.stakeholderSummary}"
+          </blockquote>
         </div>
       </section>
 
-      {/* 4. Action Recommendations Grid */}
-      <section className="bg-white rounded-[24px] p-4.5 card-shadow border border-outline-variant/30 space-y-3.5">
+      {/* SECTION 4: Strategic Recommendations 2x2 Grid */}
+      <section className="bg-white rounded-[24px] p-4 card-shadow border border-outline-variant/40 space-y-3">
         <div className="flex items-center gap-1.5">
           <span className="material-symbols-outlined text-primary text-[20px]">recommend</span>
-          <h4 className="font-display font-bold text-[11px] text-slate-500 uppercase tracking-wider">Recommendations</h4>
+          <h4 className="font-display font-bold text-[10px] text-slate-500 uppercase tracking-wider">Recommendations Checklist</h4>
         </div>
 
-        <div className="grid grid-cols-1 gap-3">
-          {/* Financial Rec */}
-          <div className="p-3 bg-surface rounded-xl border border-outline-variant/15 space-y-1.5">
-            <div className="flex items-center gap-1.5 text-primary">
-              <span className="material-symbols-outlined text-[16px]">account_balance_wallet</span>
-              <h5 className="font-display font-extrabold text-[10.5px] uppercase tracking-wide">Financial Controls</h5>
+        <div className="grid grid-cols-2 gap-2.5">
+          {/* Card 1: Financial Controls */}
+          <div className="p-2.5 bg-surface rounded-xl border border-outline-variant/15 flex flex-col justify-between h-[95px]">
+            <div className="flex items-center gap-1 text-primary">
+              <span className="material-symbols-outlined text-[14px]">account_balance_wallet</span>
+              <h5 className="font-display font-bold text-[9px] uppercase tracking-wide">Financials</h5>
             </div>
-            <ul className="space-y-1 pl-4.5 list-disc text-[10.5px] font-medium text-slate-600 leading-normal">
+            <ul className="list-disc pl-3 text-[8.5px] font-semibold text-slate-500 space-y-0.5 leading-snug mt-1.5 flex-1 overflow-y-auto">
               {healthData.recommendations.financial.map((r, i) => <li key={i}>{r}</li>)}
             </ul>
           </div>
 
-          {/* Execution Rec */}
-          <div className="p-3 bg-surface rounded-xl border border-outline-variant/15 space-y-1.5">
-            <div className="flex items-center gap-1.5 text-primary">
-              <span className="material-symbols-outlined text-[16px]">rocket_launch</span>
-              <h5 className="font-display font-extrabold text-[10.5px] uppercase tracking-wide">Milestone Execution</h5>
+          {/* Card 2: Milestone Execution */}
+          <div className="p-2.5 bg-surface rounded-xl border border-outline-variant/15 flex flex-col justify-between h-[95px]">
+            <div className="flex items-center gap-1 text-primary">
+              <span className="material-symbols-outlined text-[14px]">rocket_launch</span>
+              <h5 className="font-display font-bold text-[9px] uppercase tracking-wide">Execution</h5>
             </div>
-            <ul className="space-y-1 pl-4.5 list-disc text-[10.5px] font-medium text-slate-600 leading-normal">
+            <ul className="list-disc pl-3 text-[8.5px] font-semibold text-slate-500 space-y-0.5 leading-snug mt-1.5 flex-1 overflow-y-auto">
               {healthData.recommendations.execution.map((r, i) => <li key={i}>{r}</li>)}
             </ul>
           </div>
 
-          {/* Collaboration Rec */}
-          <div className="p-3 bg-surface rounded-xl border border-outline-variant/15 space-y-1.5">
-            <div className="flex items-center gap-1.5 text-primary">
-              <span className="material-symbols-outlined text-[16px]">handshake</span>
-              <h5 className="font-display font-extrabold text-[10.5px] uppercase tracking-wide">Founder Alignment</h5>
+          {/* Card 3: Founder Alignment */}
+          <div className="p-2.5 bg-surface rounded-xl border border-outline-variant/15 flex flex-col justify-between h-[95px]">
+            <div className="flex items-center gap-1 text-primary">
+              <span className="material-symbols-outlined text-[14px]">handshake</span>
+              <h5 className="font-display font-bold text-[9px] uppercase tracking-wide">Alignment</h5>
             </div>
-            <ul className="space-y-1 pl-4.5 list-disc text-[10.5px] font-medium text-slate-600 leading-normal">
+            <ul className="list-disc pl-3 text-[8.5px] font-semibold text-slate-500 space-y-0.5 leading-snug mt-1.5 flex-1 overflow-y-auto">
               {healthData.recommendations.collaboration.map((r, i) => <li key={i}>{r}</li>)}
             </ul>
           </div>
 
-          {/* Goals Rec */}
-          <div className="p-3 bg-surface rounded-xl border border-outline-variant/15 space-y-1.5">
-            <div className="flex items-center gap-1.5 text-primary">
-              <span className="material-symbols-outlined text-[16px]">crisis_line</span>
-              <h5 className="font-display font-extrabold text-[10.5px] uppercase tracking-wide">Roadmap Goals</h5>
+          {/* Card 4: Roadmap Goals */}
+          <div className="p-2.5 bg-surface rounded-xl border border-outline-variant/15 flex flex-col justify-between h-[95px]">
+            <div className="flex items-center gap-1 text-primary">
+              <span className="material-symbols-outlined text-[14px]">crisis_line</span>
+              <h5 className="font-display font-bold text-[9px] uppercase tracking-wide">Roadmap</h5>
             </div>
-            <ul className="space-y-1 pl-4.5 list-disc text-[10.5px] font-medium text-slate-600 leading-normal">
+            <ul className="list-disc pl-3 text-[8.5px] font-semibold text-slate-500 space-y-0.5 leading-snug mt-1.5 flex-1 overflow-y-auto">
               {healthData.recommendations.goals.map((r, i) => <li key={i}>{r}</li>)}
             </ul>
           </div>
         </div>
       </section>
 
-      {/* 5. Stakeholder Summary */}
-      <section className="bg-white rounded-[24px] p-4.5 card-shadow border border-outline-variant/30 space-y-3 relative">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[#0d1c32] text-[18px]">assignment</span>
-            <h4 className="font-display font-bold text-[11px] text-slate-500 uppercase tracking-wider">Executive Summary</h4>
+      {/* SECTION 5: Predictive Timeline Grid */}
+      <section className="grid grid-cols-2 gap-3">
+        {/* Card 1: Timeline Probability Metrics */}
+        <div className="bg-white rounded-[24px] p-4 card-shadow border border-outline-variant/40 flex flex-col justify-between h-[160px]">
+          <h4 className="font-display font-bold text-[9px] text-slate-500 uppercase tracking-wider block">Timeline Forecast</h4>
+          
+          <div className="space-y-2 mt-2 flex-1 flex flex-col justify-center">
+            <div className="flex justify-between items-center text-[9.5px]">
+              <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">On-Time</span>
+              <span className="font-black text-[#0d1c32]">{healthData.predictions.milestonesOnTimeProb}%</span>
+            </div>
+            <div className="flex justify-between items-center text-[9.5px] border-t border-outline-variant/10 pt-2">
+              <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">Stability</span>
+              <span className={`text-[8.5px] font-black uppercase px-2 py-0.5 rounded-full ${
+                healthData.predictions.financialStability === 'Stable' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
+              }`}>
+                {healthData.predictions.financialStability}
+              </span>
+            </div>
+            <div className="flex justify-between items-center text-[9.5px] border-t border-outline-variant/10 pt-2">
+              <span className="text-slate-400 font-bold uppercase tracking-wider text-[8px]">Projected</span>
+              <span className="text-emerald-600 font-black">{healthData.predictions.forecastedSuccessPercent}% Succ.</span>
+            </div>
           </div>
-          <button 
-            onClick={handleCopySummary}
-            className="flex items-center gap-1 bg-surface border border-outline-variant/20 rounded-lg px-2 py-0.5 text-[9px] font-black text-[#0d1c32] hover:bg-slate-50 active:scale-95 transition-all"
-          >
-            <span className="material-symbols-outlined text-[13px]">content_copy</span>
-            Copy
-          </button>
         </div>
 
-        <blockquote className="bg-slate-50 rounded-xl p-3 text-[10.5px] font-semibold text-slate-600 border-l-3 border-[#0d1c32] leading-relaxed italic text-left">
-          "{healthData.stakeholderSummary}"
-        </blockquote>
-      </section>
-
-      {/* 6. Predictions Forecast list */}
-      <section className="bg-white rounded-[24px] p-4.5 card-shadow border border-outline-variant/30 space-y-3.5">
-        <div className="flex items-center gap-1.5">
-          <span className="material-symbols-outlined text-primary text-[20px]">auto_graph</span>
-          <h4 className="font-display font-bold text-[11px] text-slate-500 uppercase tracking-wider">Predictive Future Timeline</h4>
-        </div>
-
-        <div className="divide-y divide-outline-variant/15 text-[10.5px] font-semibold text-slate-600">
-          <div className="flex justify-between py-2.5">
-            <span>On-Time Milestone Probability</span>
-            <span className="text-[#0d1c32] font-black">{healthData.predictions.milestonesOnTimeProb}%</span>
-          </div>
-          <div className="flex justify-between py-2.5 items-center">
-            <span>Financial Stability Index</span>
-            <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
-              healthData.predictions.financialStability === 'Stable' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
-            }`}>
-              {healthData.predictions.financialStability}
-            </span>
-          </div>
-          <div className="flex justify-between py-2.5">
-            <span>Venture Success Projection</span>
-            <span className="text-emerald-600 font-black">{healthData.predictions.forecastedSuccessPercent}% Success</span>
-          </div>
-          <div className="flex justify-between py-2.5 flex-col gap-2">
-            <span>Timeline Risk Indicators</span>
-            <div className="flex flex-wrap gap-1.5">
+        {/* Card 2: Predictive Risk Indicators */}
+        <div className="bg-white rounded-[24px] p-4 card-shadow border border-outline-variant/40 flex flex-col justify-between h-[160px]">
+          <h4 className="font-display font-bold text-[9px] text-slate-500 uppercase tracking-wider block font-bold">Risk Indicators</h4>
+          
+          <div className="flex-1 flex flex-col justify-center mt-2.5">
+            <div className="flex flex-col gap-1.5 max-h-[110px] overflow-y-auto">
               {healthData.predictions.keyRisks.map((k, i) => (
-                <span key={i} className="text-[8.5px] font-black text-[#ba1a1a] bg-rose-50 border border-rose-100 rounded-md px-2 py-0.5 flex items-center gap-1 select-none">
-                  <span className="w-1 h-1 rounded-full bg-rose-500" />
+                <span key={i} className="text-[8px] font-black text-[#ba1a1a] bg-rose-50 border border-rose-100 rounded-md px-1.5 py-0.5 flex items-center gap-1 select-none leading-normal">
+                  <span className="w-1 h-1 rounded-full bg-rose-500 shrink-0" />
                   {k}
                 </span>
               ))}
