@@ -26,6 +26,10 @@ const AppContent: React.FC = () => {
   const [moreSubScreen, setMoreSubScreen] = useState<'menu' | 'disputes' | 'drawings' | 'vendors' | 'milestones' | 'mou' | 'reports' | 'settings' | 'designspecs' | 'team' | 'health'>('menu');
   const [partnerDropdownOpen, setPartnerDropdownOpen] = useState(false);
 
+  const healthData = React.useMemo(() => {
+    return calculateVentureHealth(partners, expenses, drawings, milestones);
+  }, [partners, expenses, drawings, milestones]);
+
   if (isLoading) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center py-20 text-primary">
@@ -38,10 +42,6 @@ const AppContent: React.FC = () => {
   if (!userSession) {
     return <Auth />;
   }
-
-  const healthData = React.useMemo(() => {
-    return calculateVentureHealth(partners, expenses, drawings, milestones);
-  }, [partners, expenses, drawings, milestones]);
 
   // Render onboarding card if not configured
   if (!isConfigured) {
