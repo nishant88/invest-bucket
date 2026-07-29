@@ -336,7 +336,7 @@ const AppContent: React.FC = () => {
         <div className="relative flex justify-center items-center flex-1 h-full select-none">
           <button
             onClick={() => setSpeedDialOpen(!speedDialOpen)}
-            className="w-14 h-14 -mt-7 bg-[#fae403] text-[#0d1c32] rounded-full flex items-center justify-center shadow-lg transition-all transform active:scale-95 border-[4px] border-[#0d1c32] hover:scale-105 z-40"
+            className="w-14 h-14 -mt-[60px] bg-[#fae403] text-[#0d1c32] rounded-full flex items-center justify-center shadow-lg transition-all transform active:scale-95 border-[4px] border-[#0d1c32] hover:scale-105 z-40"
             title="Quick Actions"
           >
             <span className={`material-symbols-outlined text-[30px] font-black transition-transform duration-300 ${speedDialOpen ? 'rotate-45' : ''}`}>add</span>
