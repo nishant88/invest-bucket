@@ -16,19 +16,14 @@ import { DesignSpecs } from './components/DesignSpecs';
 import { Auth } from './components/Auth';
 import { TeamManagement } from './components/TeamManagement';
 import { VentureHealth } from './components/VentureHealth';
-import { calculateVentureHealth } from './utils/calculations';
 
 const AppContent: React.FC = () => {
   const { t } = useTranslation();
-  const { isConfigured, bizName, isLoading, userSession, logoutUser, partners, expenses, drawings, milestones } = useBucket();
+  const { isConfigured, bizName, isLoading, userSession, logoutUser } = useBucket();
 
   const [activeTab, setActiveTab] = useState<'dashboard' | 'expenses' | 'approvals' | 'more'>('dashboard');
   const [moreSubScreen, setMoreSubScreen] = useState<'menu' | 'disputes' | 'drawings' | 'vendors' | 'milestones' | 'mou' | 'reports' | 'settings' | 'designspecs' | 'team' | 'health'>('menu');
   const [partnerDropdownOpen, setPartnerDropdownOpen] = useState(false);
-
-  const healthData = React.useMemo(() => {
-    return calculateVentureHealth(partners, expenses, drawings, milestones);
-  }, [partners, expenses, drawings, milestones]);
 
   if (isLoading) {
     return (
@@ -238,27 +233,6 @@ const AppContent: React.FC = () => {
 
         {/* Right side items: Bell Notification and Active Partner Avatar */}
         <div className="flex items-center gap-3">
-          {/* Venture Health Status Pill */}
-          <button
-            onClick={() => handleMoreNavigation('health')}
-            className={`flex items-center gap-1.5 text-[9px] font-black px-2.5 py-1 rounded-full border shadow-sm active:scale-95 transition-all select-none ${
-              healthData.status === 'Green' 
-                ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
-                : healthData.status === 'Amber'
-                ? 'bg-amber-50 text-amber-600 border-amber-100'
-                : 'bg-rose-50 text-rose-600 border-rose-100'
-            }`}
-          >
-            <span className={`w-1.5 h-1.5 rounded-full ${
-              healthData.status === 'Green' 
-                ? 'bg-emerald-500'
-                : healthData.status === 'Amber'
-                ? 'bg-amber-500'
-                : 'bg-rose-500'
-            } animate-pulse`} />
-            {healthData.status === 'Green' ? 'HEALTHY' : healthData.status === 'Amber' ? 'ATTENTION' : 'CRITICAL'}
-          </button>
-
           <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-1.5 rounded-full hover:bg-slate-100">
             <span className="material-symbols-outlined text-[22px]" style={{ fontVariationSettings: "'FILL' 0" }}>notifications</span>
           </button>
