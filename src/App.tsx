@@ -24,6 +24,7 @@ const AppContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'expenses' | 'approvals' | 'more'>('dashboard');
   const [moreSubScreen, setMoreSubScreen] = useState<'menu' | 'disputes' | 'drawings' | 'vendors' | 'milestones' | 'mou' | 'reports' | 'settings' | 'designspecs' | 'team' | 'health'>('menu');
   const [partnerDropdownOpen, setPartnerDropdownOpen] = useState(false);
+  const [speedDialOpen, setSpeedDialOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -299,57 +300,14 @@ const AppContent: React.FC = () => {
         {renderContent()}
       </main>
 
-      {/* Floating Action Speed Dial Menu */}
-      <div className="absolute bottom-24 right-5 flex flex-col-reverse items-end gap-3 z-30 group pb-3">
-        {/* Main Trigger FAB */}
-        <button
-          className="w-12 h-12 bg-black text-[#fae403] rounded-full flex items-center justify-center shadow-lg transition-all transform active:scale-95 group-hover:rotate-45"
-          title="Quick Actions"
-        >
-          <span className="material-symbols-outlined text-[26px] font-bold">add</span>
-        </button>
-
-        {/* Action 1: Scan OCR */}
-        <div className="flex items-center opacity-0 translate-y-3 scale-90 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 delay-[50ms]">
-          <span className="bg-[#0d1c32] text-white text-[9px] font-bold px-2 py-0.5 rounded-md shadow-md mr-1 select-none">
-            Scan OCR
-          </span>
-          <button
-            onClick={() => {
-              setActiveTab('expenses');
-              setMoreSubScreen('menu');
-            }}
-            className="w-10 h-10 bg-black text-[#fae403] rounded-full flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-all"
-            title="Scan OCR"
-          >
-            <span className="material-symbols-outlined text-[20px]">photo_camera</span>
-          </button>
-        </div>
-
-        {/* Action 2: Approvals Inbox */}
-        <div className="flex items-center opacity-0 translate-y-3 scale-90 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300">
-          <span className="bg-[#0d1c32] text-white text-[9px] font-bold px-2 py-0.5 rounded-md shadow-md mr-1 select-none">
-            Inbox Approvals
-          </span>
-          <button
-            onClick={() => {
-              setActiveTab('approvals');
-              setMoreSubScreen('menu');
-            }}
-            className="w-10 h-10 bg-black text-[#fae403] rounded-full flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-all"
-            title="Approvals Inbox"
-          >
-            <span className="material-symbols-outlined text-[20px]">pending_actions</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Floating Bottom Nav Bar */}
+      {/* Master Floating Navigation Bar */}
       <nav className="absolute bottom-5 left-4 right-4 h-16 bg-[#0d1c32] backdrop-blur-md border border-white/10 rounded-full flex items-center justify-around z-30 shadow-[0_16px_40px_rgba(13,28,50,0.25)]">
+        {/* Tab 1: Ledger */}
         <button
           onClick={() => {
             setActiveTab('dashboard');
             setMoreSubScreen('menu');
+            setSpeedDialOpen(false);
           }}
           className={`flex flex-col items-center justify-center flex-1 h-full rounded-full transition-all ${
             activeTab === 'dashboard' ? 'text-[#b2ee4a]' : 'text-white/60 hover:text-white'
@@ -359,10 +317,12 @@ const AppContent: React.FC = () => {
           <span className="text-[9px] font-bold mt-0.5">Ledger</span>
         </button>
 
+        {/* Tab 2: Log Spend */}
         <button
           onClick={() => {
             setActiveTab('expenses');
             setMoreSubScreen('menu');
+            setSpeedDialOpen(false);
           }}
           className={`flex flex-col items-center justify-center flex-1 h-full rounded-full transition-all ${
             activeTab === 'expenses' ? 'text-[#b2ee4a]' : 'text-white/60 hover:text-white'
@@ -372,10 +332,82 @@ const AppContent: React.FC = () => {
           <span className="text-[9px] font-bold mt-0.5">Log Spend</span>
         </button>
 
+        {/* Tab 3: Raised Central Quick Action FAB */}
+        <div className="relative flex justify-center items-center flex-1 h-full select-none">
+          <button
+            onClick={() => setSpeedDialOpen(!speedDialOpen)}
+            className="w-13 h-13 -mt-6 bg-[#fae403] text-[#0d1c32] rounded-full flex items-center justify-center shadow-lg transition-all transform active:scale-95 border-[4px] border-[#0d1c32] hover:scale-105 z-40"
+            title="Quick Actions"
+          >
+            <span className={`material-symbols-outlined text-[24px] font-black transition-transform duration-300 ${speedDialOpen ? 'rotate-45' : ''}`}>add</span>
+          </button>
+
+          {speedDialOpen && (
+            <>
+              {/* Speed Dial Backdrop */}
+              <div 
+                className="fixed inset-0 bg-transparent z-40" 
+                onClick={() => setSpeedDialOpen(false)}
+              />
+              
+              {/* Floating Speed Dial Actions Modal */}
+              <div className="absolute bottom-20 left-1/2 -translate-x-1/2 bg-[#0d1c32] border border-white/10 rounded-2xl p-2 w-48 shadow-2xl z-50 flex flex-col gap-1 animate-fade-in text-white">
+                <button
+                  onClick={() => {
+                    setActiveTab('expenses');
+                    setMoreSubScreen('menu');
+                    setSpeedDialOpen(false);
+                  }}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-white"
+                >
+                  <span className="material-symbols-outlined text-[18px] text-[#fae403]">photo_camera</span>
+                  <span className="text-[10px] font-bold">Scan Receipt OCR</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setActiveTab('approvals');
+                    setMoreSubScreen('menu');
+                    setSpeedDialOpen(false);
+                  }}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-white border-t border-white/5"
+                >
+                  <span className="material-symbols-outlined text-[18px] text-[#fae403]">pending_actions</span>
+                  <span className="text-[10px] font-bold">Inbox Approvals</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    handleMoreNavigation('team');
+                    setSpeedDialOpen(false);
+                  }}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-white border-t border-white/5"
+                >
+                  <span className="material-symbols-outlined text-[18px] text-[#fae403]">group_add</span>
+                  <span className="text-[10px] font-bold">Invite Co-Founder</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    handleMoreNavigation('health');
+                    setSpeedDialOpen(false);
+                  }}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-white border-t border-white/5"
+                >
+                  <span className="material-symbols-outlined text-[18px] text-[#fae403]">analytics</span>
+                  <span className="text-[10px] font-bold">Check Venture Health</span>
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Tab 4: Inbox */}
         <button
           onClick={() => {
             setActiveTab('approvals');
             setMoreSubScreen('menu');
+            setSpeedDialOpen(false);
           }}
           className={`flex flex-col items-center justify-center flex-1 h-full rounded-full transition-all ${
             activeTab === 'approvals' ? 'text-[#b2ee4a]' : 'text-white/60 hover:text-white'
@@ -385,10 +417,12 @@ const AppContent: React.FC = () => {
           <span className="text-[9px] font-bold mt-0.5">Inbox</span>
         </button>
 
+        {/* Tab 5: More menu */}
         <button
           onClick={() => {
             setActiveTab('more');
             setMoreSubScreen('menu');
+            setSpeedDialOpen(false);
           }}
           className={`flex flex-col items-center justify-center flex-1 h-full rounded-full transition-all ${
             activeTab === 'more' ? 'text-[#b2ee4a]' : 'text-white/60 hover:text-white'
