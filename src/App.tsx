@@ -232,12 +232,12 @@ const AppContent: React.FC = () => {
           )}
           
           <div className="flex items-center">
-            {/* Mint green circle with wallet */}
-            <div className="w-9 h-9 rounded-full bg-[#d1fae5] flex items-center justify-center text-[#065f46] shrink-0 shadow-sm">
+            {/* Deep navy circle with wallet */}
+            <div className="w-9 h-9 rounded-full bg-[#0d1c32]/10 flex items-center justify-center text-[#0d1c32] shrink-0 shadow-sm">
               <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>wallet</span>
             </div>
             {/* Title text */}
-            <span className="font-display font-extrabold text-[16px] text-[#065f46] tracking-tight ml-2.5 truncate">
+            <span className="font-display font-extrabold text-[16px] text-[#0d1c32] tracking-tight ml-2.5 truncate">
               {activeTab === 'dashboard' ? (bizName || "Investor's Bucket") : getHeaderTitle()}
             </span>
           </div>

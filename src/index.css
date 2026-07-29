@@ -92,8 +92,8 @@ input:not([type="checkbox"]):not([type="radio"]), select, textarea {
 }
 input:not([type="checkbox"]):not([type="radio"]):focus, select:focus, textarea:focus {
   background: #ffffff !important;
-  outline: 2px solid #065f46 !important;
-  box-shadow: 0 6px 16px rgba(6, 95, 70, 0.08) !important;
+  outline: 2px solid #0d1c32 !important;
+  box-shadow: 0 6px 16px rgba(13, 28, 50, 0.08) !important;
   transform: translateY(-0.5px) scale(1.003) !important;
 }
 

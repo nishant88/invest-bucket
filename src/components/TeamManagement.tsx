@@ -113,7 +113,7 @@ export const TeamManagement: React.FC = () => {
                   <h5 className="font-display font-extrabold text-body-sm text-[#0d1c32] flex items-center gap-1.5">
                     {p.name}
                     {p.id === 'p1' && (
-                      <span className="bg-[#065f46]/10 text-[#065f46] text-[8px] font-bold px-1.5 py-0.5 rounded-md">Owner</span>
+                      <span className="bg-[#0d1c32]/10 text-[#0d1c32] text-[8px] font-bold px-1.5 py-0.5 rounded-md">Owner</span>
                     )}
                   </h5>
                   <p className="text-[10px] text-slate-500 font-semibold">{p.role} • {p.emailOrMobile}</p>

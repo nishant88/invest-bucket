@@ -41,7 +41,7 @@ export const Auth: React.FC = () => {
       <div className="w-full max-w-md mx-auto bg-white/60 backdrop-blur-[24px] rounded-[32px] p-6 border border-white/40 shadow-xl text-left animate-fade-in">
         {/* Header Title */}
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-[#d1fae5] flex items-center justify-center text-[#065f46] mx-auto shadow-sm mb-3">
+          <div className="w-12 h-12 rounded-full bg-[#0d1c32]/10 flex items-center justify-center text-[#0d1c32] mx-auto shadow-sm mb-3">
             <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>wallet</span>
           </div>
           <h2 className="font-display font-extrabold text-[22px] text-[#0d1c32] tracking-tight leading-tight">
@@ -164,7 +164,7 @@ export const Auth: React.FC = () => {
                   setIsLogin(false);
                   setError('');
                 }}
-                className="text-[#065f46] font-bold hover:underline"
+                className="text-[#0d1c32] font-bold hover:underline"
               >
                 Sign Up
               </button>
@@ -178,7 +178,7 @@ export const Auth: React.FC = () => {
                   setIsLogin(true);
                   setError('');
                 }}
-                className="text-[#065f46] font-bold hover:underline"
+                className="text-[#0d1c32] font-bold hover:underline"
               >
                 Sign In
               </button>
