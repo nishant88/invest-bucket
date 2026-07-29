@@ -11,6 +11,25 @@ export const VentureHealth: React.FC = () => {
   }, [partners, expenses, drawings, milestones]);
 
   const [activeInsightIndex, setActiveInsightIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  const handleNextInsight = () => {
+    if (isFading) return;
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveInsightIndex(prev => (prev + 1) % healthData.insights.length);
+      setIsFading(false);
+    }, 150);
+  };
+
+  const handlePrevInsight = () => {
+    if (isFading) return;
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveInsightIndex(prev => (prev - 1 + healthData.insights.length) % healthData.insights.length);
+      setIsFading(false);
+    }, 150);
+  };
 
   const getStatusColor = (status: 'Green' | 'Amber' | 'Red') => {
     if (status === 'Green') return { text: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100', dot: 'bg-emerald-500' };
@@ -201,7 +220,9 @@ export const VentureHealth: React.FC = () => {
               <span className="material-symbols-outlined text-[16px]">stars</span>
               <span className="text-[9px] font-black uppercase tracking-wider">AI Intelligence Insights</span>
             </div>
-            <p className="text-[12.5px] font-bold leading-relaxed text-[#0d1c32]/90 mt-2.5 pr-12 min-h-[48px] flex items-center">
+            <p className={`text-[12.5px] font-bold leading-relaxed text-[#0d1c32]/90 mt-2.5 pr-12 min-h-[48px] flex items-center transition-all duration-200 ${
+              isFading ? 'opacity-0 translate-x-1' : 'opacity-100 translate-x-0'
+            }`}>
               {healthData.insights[activeInsightIndex]}
             </p>
           </div>
@@ -212,14 +233,14 @@ export const VentureHealth: React.FC = () => {
             </span>
             <div className="flex gap-2">
               <button 
-                onClick={() => setActiveInsightIndex(prev => (prev - 1 + healthData.insights.length) % healthData.insights.length)}
-                className="w-7 h-7 bg-white rounded-full flex items-center justify-center border border-black/5 active:scale-90 transition-all shadow-sm"
+                onClick={handlePrevInsight}
+                className="w-7 h-7 bg-[#0d1c32] text-white rounded-full flex items-center justify-center border border-black/5 active:scale-90 transition-all shadow-md hover:bg-[#0d1c32]/90"
               >
                 <span className="material-symbols-outlined text-[14px]">chevron_left</span>
               </button>
               <button 
-                onClick={() => setActiveInsightIndex(prev => (prev + 1) % healthData.insights.length)}
-                className="w-7 h-7 bg-white rounded-full flex items-center justify-center border border-black/5 active:scale-90 transition-all shadow-sm"
+                onClick={handleNextInsight}
+                className="w-7 h-7 bg-[#0d1c32] text-white rounded-full flex items-center justify-center border border-black/5 active:scale-90 transition-all shadow-md hover:bg-[#0d1c32]/90"
               >
                 <span className="material-symbols-outlined text-[14px]">chevron_right</span>
               </button>
