@@ -80,7 +80,18 @@ const AppContent: React.FC = () => {
   };
 
   const renderContent = () => {
-    if (activeTab === 'dashboard') return <Dashboard />;
+    if (activeTab === 'dashboard') {
+      return (
+        <Dashboard
+          onNavigate={(tab, sub) => {
+            setActiveTab(tab);
+            if (sub) {
+              setMoreSubScreen(sub as any);
+            }
+          }}
+        />
+      );
+    }
     if (activeTab === 'expenses') return <ExpenseLogger />;
     if (activeTab === 'approvals') return <ApprovalsInbox />;
     if (activeTab === 'more') {

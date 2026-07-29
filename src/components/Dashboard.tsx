@@ -3,7 +3,7 @@ import { useBucket } from '../context/BucketContext';
 import { useTranslation } from 'react-i18next';
 import { formatIndianCurrency, calculateSummaryStats, calculateVentureHealth } from '../utils/calculations';
 
-export const Dashboard: React.FC = () => {
+export const Dashboard: React.FC<{ onNavigate?: (tab: 'dashboard' | 'expenses' | 'approvals' | 'more', screen?: string) => void }> = ({ onNavigate }) => {
   const { t } = useTranslation();
   const { partners, expenses, drawings, activePartnerId, milestones } = useBucket();
 
@@ -133,9 +133,9 @@ export const Dashboard: React.FC = () => {
       {/* Contextual Venture Health Mini Card */}
       <div 
         onClick={() => {
-          // Trigger the 'health' subscreen navigation by finding and clicking the header pill
-          const healthPill = document.querySelector('[title="View Account"]')?.parentElement?.firstChild as HTMLButtonElement;
-          if (healthPill) healthPill.click();
+          if (onNavigate) {
+            onNavigate('more', 'health');
+          }
         }}
         className="bg-white rounded-[24px] p-4 border border-outline-variant/30 flex items-center justify-between text-left cursor-pointer active:scale-[0.99] transition-all hover:bg-slate-50 relative overflow-hidden card-shadow"
       >
